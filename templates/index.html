@@ -1,15 +1,16 @@
 <!doctype html>
 <html>
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-		<script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
-		<script src="/static/js/app.js"></script>
-		<link rel="stylesheet" href="/static/css/style.css" />
-	</head>
-	<body ng-app="app">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
 
-		<!-- where AngularJS inserts partial determined by its routing -->
-		<div ng-view></div>
+  <body ng-app="myApp">
+    <h1>myApp</h1>
 
-	</body>
+    <!-- where AngularJS inserts partial determined by its routing -->
+    <div ng-view></div>
+  </body>
 </html>

@@ -1,23 +1,25 @@
-"use strict";
+"use strict";   // See note about "use strict"; below
 
-var app = angular.module("app", ["ngRoute"]);
+var myApp = angular.module("myApp", [
+ "ngRoute",
+]);
 
-app.config(["$routeProvider", 
-	function($routeProvider) {
-		$routeProvider
-			.when("/", {
-				templateUrl: "/static/partials/index.html"
-			})
-			.when("/compose", {
-				templateUrl: "/static/partials/compose.html"
-			})
-			.when("/decompose", {
-				templateUrl: "/static/partials/decompose.html"
-			})
-			.when("/about", {
-				templateUrl: "/static/partials/about.html"
-			});
-			.otherwise({
-				redirectTo: "/"
-			});
-	}]);
+myApp.config(["$routeProvider",
+     function($routeProvider) {
+         $routeProvider.
+             when("/", {
+                 templateUrl: "/static/partials/index.html",
+             }).
+             when("/compose", {
+                 templateUrl: "/static/partials/compose.html",
+             }).
+             when("/decompose", {
+                 templateUrl: "/static/partials/decompose.html",
+             }).
+             when("/about", {
+                 templateUrl: "/static/partials/about.html",
+             }).
+             otherwise({
+                 redirectTo: "/"
+             });
+    }]);
