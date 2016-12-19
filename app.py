@@ -5,7 +5,9 @@ from webargs import fields, validate
 from webargs.flaskparser import use_kwargs
 
 # Constants
-db_path = "resources/wiki_processed.txt"
+DB_PATH = "resources/wiki_processed.txt"
+MAX_RESULTS = 50
+
 
 # Helper functions
 def int_tuple(iterable):
@@ -17,9 +19,16 @@ def chr_list(iterable):
 def ord_tuple(iterable):
   return tuple(ord(element) for element in iterable)
 
+def slice_list(my_list, start, max_length):
+  if start >= len(my_list):
+    return []
+  else:
+    end = min(len(my_list), start + max_length)
+    return my_list[start:end]
+
 def initialize_db():
   db = Database()
-  with open(db_path, mode="r", encoding="utf-16") as db_file:
+  with open(DB_PATH, mode="r", encoding="utf-16") as db_file:
     for line in db_file:
       parts = line.strip().split(", ")
 
@@ -58,20 +67,21 @@ class CharactersResource(Resource):
   characters_args = {
     "kind": fields.Int(validate=validate.Range(min=1, max=11)),
     "part1": fields.String(),
-    "part2": fields.String()
+    "part2": fields.String(),
+    "start": fields.Int(missing=0)
   }
 
-  #TODO: add a limiter. Like only return 50 characters or something
-
   @use_kwargs(characters_args)
-  def get(self, kind, part1, part2):
+  def get(self, kind, part1, part2, start):
     part1 = int_tuple(part1.split("-")) if part1 else None
     part2 = int_tuple(part2.split("-")) if part2 else None
 
-    characters = db.find_characters(kind, part1, part2)
+    characters_set = db.find_characters(kind, part1, part2)
+    characters = chr_list([character.cp for character in characters_set])
+    characters = slice_list(characters, start, start + MAX_RESULTS)
 
     return {
-      "characters": chr_list([character.cp for character in characters])
+      "characters": characters
     }
 
 @app.route("/")
