@@ -78,8 +78,8 @@ class CharactersResource(Resource):
 def index():
   return send_file("templates/index.html")
 
-api.add_resource(CharacterResource, "/char/<int:char_cp>")
-api.add_resource(CharactersResource, "/chars/")
+api.add_resource(CharacterResource, "/api/char/<int:char_cp>")
+api.add_resource(CharactersResource, "/api/chars/")
 
 if __name__ == "__main__":
   db = initialize_db()

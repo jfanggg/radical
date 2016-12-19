@@ -1,1 +1,16 @@
-<h1>Decompose page</h1>
+<div ng-controller="decomposeController">
+  <h1>Decompose page</h1>
+
+  <p>
+    Enter character: 
+    <input type="text" placeholder="愛" ng-model="character"/>
+  </p>
+  <button ng-click="decomposeCharacter()">Submit</button>
+
+  <p>Kind  is {{ kind }}</p>
+  <p>Part1 is {{ part1 }}</p>
+  <p>Part2 is {{ part2 }}</p>
+
+</div>
+
+
