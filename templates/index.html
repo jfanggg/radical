@@ -1,41 +1,49 @@
 <!doctype html>
 <html>
-  <head>
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
+    <head>
+        <!-- AngularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+        <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
 
-    <!-- My JS stuff -->
-    <script src="/static/js/app.js"></script>
+        <!-- My JS stuff -->
+        <script src="/static/js/app.js"></script>
 
-    <!-- My CSS stuff -->
-    <link rel="stylesheet" href="/static/css/style.css" />
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <title>radical</title>
-  </head>
-
-  <body ng-app="app">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="navbar-header">
-        <a class="navbar-brand">radical</a>
-      </div>
+        <!-- My CSS stuff -->
+        <link rel="stylesheet" href="/static/css/style.css" />
         
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/#/">Home</a></li>
-          <li><a href="/#/compose">Compose</a></li>
-          <li><a href="/#/decompose">Decompose</a></li>
-          <li><a href="/#/about">About</a></li>
-        </ul>
-        
-    </nav>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-    <!-- where AngularJS inserts partial determined by its routing -->
-    <div ng-view></div>
-  </body>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        
+        <!-- metadata -->
+        <meta charset="UTF-8">
+        
+        <title>radical</title>
+    </head>
+
+    <body ng-app="app">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand">radical</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/#/">Home</a></li>
+                    <li><a href="/#/compose">Compose</a></li>
+                    <li><a href="/#/decompose">Decompose</a></li>
+                    <li><a href="/#/about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- where AngularJS inserts partial determined by its routing -->
+        <div ng-view></div>
+    </body>
 </html>
