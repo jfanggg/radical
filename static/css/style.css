@@ -6,3 +6,8 @@
 body{
   padding-top: 50px;
 }
+
+/* For some reason, bootstrap's navbar-right has -15 margin-right */
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+}
