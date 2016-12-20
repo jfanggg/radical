@@ -1,6 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body{
-	max-width:800px;
-	margin-left:auto;
-	margin-right:auto;
-	font-family:Arial;
+  padding-top: 50px;
 }
