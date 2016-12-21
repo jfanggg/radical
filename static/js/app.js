@@ -33,18 +33,34 @@ app.config(["$routeProvider",
 app.controller("indexController", function($scope) {
 
 });
-app.controller("composeController", function($scope, $http) {
+app.controller("composeController", function($scope, $http) {    
   // input
-  $scope.kind = 0;
+  $scope.kind = 1;
   $scope.part1 = "";
   $scope.part2 = "";
 
   // output
   $scope.characters = [];
+    
+    
+  // data 
+  $scope.titles = [
+    "Graphical primitive. Non-composition", 
+    "Horizontal composition ", 
+    "Vertical composition", 
+    "Inclusion of one character inside another", 
+    "Vertical composition. Top part is a repetition", 
+    "Horizontal composition of three. First and third are the same", 
+    "Repetition of three", 
+    "Repetition of four", 
+    "Vertical composition, separated by '冖'", 
+    "Graphical superposition or addition", 
+    "Deformed version of another character"
+  ];
 
   $scope.composeCharacters = function() {
-    console.log("scope kind is " + $scope.kind)
-    var url = "/api/chars/?"
+    console.log("scope kind is " + $scope.kind);
+    var url = "/api/chars/?";
     if ($scope.kind !== 0) {
       url += "kind=" + $scope.kind.toString() + "&";
     }

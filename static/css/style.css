@@ -24,6 +24,14 @@ body{
     height: 100%;
 }
 
+.page {
+    max-width: 1000px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
 div[ng-view] {
     height: 100%;
 }
@@ -38,8 +46,8 @@ div[ng-controller="indexController"] {
     background: linear-gradient(90deg, #f6f6f6 50%, #2f2f2f 50%);
     text-align: center;
     
-    /* Avoid 0 height due to floated elements */
-    overflow: hidden;
+    
+    overflow: hidden;/* Avoid 0 height due to floated elements */
 }
 
 #index-left {
@@ -88,4 +96,49 @@ div[ng-controller="indexController"] {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+/*
+Compose page
+*/
+
+div[ng-controller="composeController"] {
+    height: 100%;
+}
+
+#comose-container {
+    height: 100%;
+}
+
+#compose-kind-container {
+    text-align: center;
+}
+
+#compose-kind-container img {
+    width: 86px;
+    height: 86px;
+    
+    padding: 2px;
+    border: 1px solid transparent;
+}
+
+.compose-kinds-label > input{
+    visibility: hidden; /* Makes radio button not-clickable */
+    position: absolute; /* Remove radio button from document flow */
+}
+
+.compose-kinds-label > input + img{
+    cursor:pointer;
+    width: 86px;
+    height: 86px;
+    
+    padding: 2px;
+    border: 1px solid transparent;
+}
+.compose-kinds-label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border: 1px solid red;
+}
+
+#compose-container .ng-scope {
+    width: auto;
 }
