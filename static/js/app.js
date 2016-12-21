@@ -8,8 +8,10 @@ app.config(["$routeProvider",
   function($routeProvider) {
     $routeProvider.
       when("/", {
-        templateUrl: "/static/partials/index.html",
-        controller: "indexController"
+        /*templateUrl: "/static/partials/index.html",
+        controller: "indexController"*/
+        templateUrl: "/static/partials/compose.html",
+        controller: "composeController"
       }).
       when("/compose", {
         templateUrl: "/static/partials/compose.html",

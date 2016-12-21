@@ -24,11 +24,15 @@ body{
     height: 100%;
 }
 
-div.ng-scope {
+div[ng-view] {
     height: 100%;
 }
 
 /* Index page */
+div[ng-controller="indexController"] {
+    height: 100%;
+}
+
 #index-container {
     height: 100%;
     background: linear-gradient(90deg, #f6f6f6 50%, #2f2f2f 50%);
