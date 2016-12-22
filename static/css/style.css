@@ -163,7 +163,11 @@ div[ng-controller="composeController"] {
     font-size: 28px;
 }
 
-#compose-results-table, #compose-results-table td {
+.compose-results-border {
     border: 1px solid #e0e0e0;
     border-collapse: collapse;
+}
+
+.compose-results-no-border {
+    border: 1px solid transparent;
 }

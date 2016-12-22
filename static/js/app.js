@@ -32,26 +32,28 @@ app.controller("indexController", function($scope) {
 
 });
 app.controller("composeController", function($scope, $http) {    
-  // data 
+  // constants 
   $scope.titles = [
-    "Graphical primitive. Non-composition", 
-    "Horizontal composition ", 
-    "Vertical composition", 
-    "Inclusion of one character inside another", 
-    "Vertical composition. Top part is a repetition", 
-    "Horizontal composition of three. First and third are the same", 
-    "Repetition of three", 
-    "Repetition of four", 
-    "Vertical composition, separated by '冖'", 
-    "Graphical superposition or addition", 
-    "Deformed version of another character"
+      "Graphical primitive. Non-composition", 
+      "Horizontal composition ", 
+      "Vertical composition", 
+      "Inclusion of one character inside another", 
+      "Vertical composition. Top part is a repetition", 
+      "Horizontal composition of three. First and third are the same", 
+      "Repetition of three", 
+      "Repetition of four", 
+      "Vertical composition, separated by '冖'", 
+      "Graphical superposition or addition", 
+      "Deformed version of another character"
   ];
-  $scope.characters_start = 0;
-
   $scope.max_table_characters = 50;
   $scope.table_rows = 5;
   $scope.table_cols = 10;
-  
+
+  // current state of the table
+  $scope.characters_start = 0;
+  $scope.characters_end = 50;
+
   // input
   $scope.kind = 1;
   $scope.part1 = "";
@@ -64,6 +66,7 @@ app.controller("composeController", function($scope, $http) {
       $scope.table.push(new Array(10).fill(""));
   }
   
+  // functions
   $scope.clearTable = function() {
     for (var i = 0; i < $scope.table_rows; i++) {
       for (var j = 0; j < $scope.table_cols; j++) {
@@ -110,6 +113,9 @@ app.controller("composeController", function($scope, $http) {
       $scope.loadTable(0);
     });
   };
+
+  // call method once initially
+  $scope.composeCharacters();
 });
 
 app.controller("decomposeController", function($scope, $http) {
