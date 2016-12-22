@@ -61,8 +61,26 @@ app.controller("composeController", function($scope, $http) {
   $scope.characters = [];
   $scope.table = [[]];
   for (var i = 0; i < 5; i++) {
-      table.push(new Array(10).fill(""));
+      $scope.table.push(new Array(10).fill(""));
   }
+
+  $scope.loadTable = function(start) {
+    for (var i = 0; i < $scope.table_rows; i++) {
+      for (var j = 0; j < $scope.table_cols; j++) {
+        var current = start + i * $scope.table_cols + j;
+
+        // If you don't have enough characters, break early
+        if (current >= $scope.characters.length) {
+          console.log(current);
+          console.log($scope.characters.length);
+          return;
+        }
+        else {
+          $scope.table[i][j] = $scope.characters[current];
+        }
+      }
+    }
+  };
 
   $scope.composeCharacters = function() {
     console.log("scope kind is " + $scope.kind);
@@ -80,25 +98,11 @@ app.controller("composeController", function($scope, $http) {
     $http.get(url)
     .then(function (response) { 
       $scope.characters = response.data.characters;
+      $scope.loadTable(0);
     });
-    $scope.loadTable(0);
-  }
-  
-  $scope.loadTable = function(start) {
-    for (var i = 0; i < $scope.table_rows; i++) {
-      for (var j = 0; j < $scope.table_cols; j++) {
-        var current = start + i * $scope.table_cols + j;
-        if (current >= $scope.characters.length) {
-          return;
-        }
-        else {
-          $scope.table[i][j] = characters[current];
-        }
-      }
-    }
-    console.log($scope.table);
-  }
+  };
 });
+
 app.controller("decomposeController", function($scope, $http) {
   // input
   $scope.character = "";
@@ -116,5 +120,5 @@ app.controller("decomposeController", function($scope, $http) {
       $scope.part1 = response.data.part1;
       $scope.part2 = response.data.part2;
     });
-  }
+  };
 });
