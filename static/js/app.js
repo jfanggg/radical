@@ -59,12 +59,21 @@ app.controller("composeController", function($scope, $http) {
 
   // output
   $scope.characters = [];
-  $scope.table = [[]];
-  for (var i = 0; i < 5; i++) {
+  $scope.table = [];
+  for (var i = 0; i < $scope.table_rows; i++) {
       $scope.table.push(new Array(10).fill(""));
+  }
+  
+  $scope.clearTable = function() {
+    for (var i = 0; i < $scope.table_rows; i++) {
+      for (var j = 0; j < $scope.table_cols; j++) {
+        $scope.table[i][j] = "";
+      }
+    }
   }
 
   $scope.loadTable = function(start) {
+    $scope.clearTable();
     for (var i = 0; i < $scope.table_rows; i++) {
       for (var j = 0; j < $scope.table_cols; j++) {
         var current = start + i * $scope.table_cols + j;
@@ -83,7 +92,7 @@ app.controller("composeController", function($scope, $http) {
   };
 
   $scope.composeCharacters = function() {
-    console.log("scope kind is " + $scope.kind);
+    console.log("table length is " + $scope.table.length);
     var url = "/api/chars/?";
     if ($scope.kind !== 0) {
       url += "kind=" + $scope.kind.toString() + "&";

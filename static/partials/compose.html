@@ -7,39 +7,40 @@
                 <span ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
                     <label class="compose-kinds-label">
                         <input type="radio" name="kind" ng-model="$parent.kind" value="{{ i }}">
-                        <img src="{{ '/static/img/kind' + i +  '.png' }}" title="{{ $parent.titles[i - 1] }}">
+                        <img src="{{ '/static/img/kind' + i + '.png' }}" title="{{ $parent.titles[i - 1] }}">
                     </label>
                 </span>
             </form>
             
             <h2>Enter component(s):</h2>
-            <p>
-              Part 1:
-              <input type="text" placeholder="女" ng-model="part1"/>
-            </p>
-            <p>
-              Part 2:
-              <input type="text" placeholder="子" ng-model="part2"/>
-            </p>
+
+            <div id="compose-parts-container">
+                <div class="compose-parts">
+                  <p>Part 1:
+                    <input type="text" placeholder="女" ng-model="part1"/>
+                  </p>
+                </div>
+
+                <div class="compose-parts">
+                  <p>Part 2:
+                    <input type="text" placeholder="子" ng-model="part2"/>
+                  </p>
+                </div>
+            </div>
+
             <button ng-click="composeCharacters()">Search</button>
 
-            <p>Characters are {{ characters }}</p>
-            <table id="compose-results-table">
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="compose-results">
+              <table id="compose-results-table">
+                  <tbody>
+                      <tr ng-repeat="row in table">
+                          <!-- "track by $index" cause duplicates and Anuglar-->
+                          <td ng-repeat="char in row track by $index">{{ char }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+
         </div>
     </div>
 </div>

@@ -151,20 +151,19 @@ div[ng-controller="composeController"] {
     border: 1px solid red;
 }
 
-#compose-container {
-    height: 100%;
-}
-
-#compose-container .ng-scope {
-    width: auto;
-}
-
 #compose-results-table {
     margin-left: auto;
     margin-right: auto;
 }
 
 #compose-results-table td {
-    height: 96px;
-    width: 96px;
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    font-size: 28px;
+}
+
+#compose-results-table, #compose-results-table td {
+    border: 1px solid #e0e0e0;
+    border-collapse: collapse;
 }
