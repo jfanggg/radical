@@ -3,7 +3,7 @@
         <div class="page">
             <h2>Select a template:</h2>
             <h4> {{ titles[kind - 1] }} </h4>
-            <form>
+            <form id="compose-kinds-form">
                 <span ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
                     <label class="compose-kinds-label">
                         <input type="radio" name="kind" ng-model="$parent.kind" value="{{ i }}">
@@ -12,17 +12,34 @@
                 </span>
             </form>
             
+            <h2>Enter component(s):</h2>
             <p>
-              Enter part 1:
+              Part 1:
               <input type="text" placeholder="女" ng-model="part1"/>
             </p>
             <p>
-              Enter part 2:
+              Part 2:
               <input type="text" placeholder="子" ng-model="part2"/>
             </p>
-            <button ng-click="composeCharacters()">Submit</button>
+            <button ng-click="composeCharacters()">Search</button>
 
             <p>Characters are {{ characters }}</p>
+            <table id="compose-results-table">
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -122,6 +122,18 @@ div[ng-controller="composeController"] {
     border: 1px solid transparent;
 }
 
+#compose-kinds-form {
+    text-align: center;
+}
+
+#compose-kinds-form span {
+    display: inline-block;
+}
+
+.compose-kinds-label {
+    margin-bottom: 0px; /* for some reason there was extra margins at the bottom */
+}
+
 .compose-kinds-label > input{
     visibility: hidden; /* Makes radio button not-clickable */
     position: absolute; /* Remove radio button from document flow */
@@ -135,10 +147,24 @@ div[ng-controller="composeController"] {
     padding: 2px;
     border: 1px solid transparent;
 }
-.compose-kinds-label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+.compose-kinds-label > input:checked + img{
     border: 1px solid red;
+}
+
+#compose-container {
+    height: 100%;
 }
 
 #compose-container .ng-scope {
     width: auto;
+}
+
+#compose-results-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#compose-results-table td {
+    height: 96px;
+    width: 96px;
 }

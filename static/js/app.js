@@ -1,8 +1,6 @@
 "use strict";
 
-var app = angular.module("app", [
- "ngRoute",
-]);
+var app = angular.module("app", ["ngRoute"]);
 
 app.config(["$routeProvider",
   function($routeProvider) {
@@ -34,15 +32,6 @@ app.controller("indexController", function($scope) {
 
 });
 app.controller("composeController", function($scope, $http) {    
-  // input
-  $scope.kind = 1;
-  $scope.part1 = "";
-  $scope.part2 = "";
-
-  // output
-  $scope.characters = [];
-    
-    
   // data 
   $scope.titles = [
     "Graphical primitive. Non-composition", 
@@ -57,6 +46,23 @@ app.controller("composeController", function($scope, $http) {
     "Graphical superposition or addition", 
     "Deformed version of another character"
   ];
+  $scope.characters_start = 0;
+
+  $scope.max_table_characters = 50;
+  $scope.table_rows = 5;
+  $scope.table_cols = 10;
+  
+  // input
+  $scope.kind = 1;
+  $scope.part1 = "";
+  $scope.part2 = "";
+
+  // output
+  $scope.characters = [];
+  $scope.table = [[]];
+  for (var i = 0; i < 5; i++) {
+      table.push(new Array(10).fill(""));
+  }
 
   $scope.composeCharacters = function() {
     console.log("scope kind is " + $scope.kind);
@@ -75,6 +81,22 @@ app.controller("composeController", function($scope, $http) {
     .then(function (response) { 
       $scope.characters = response.data.characters;
     });
+    $scope.loadTable(0);
+  }
+  
+  $scope.loadTable = function(start) {
+    for (var i = 0; i < $scope.table_rows; i++) {
+      for (var j = 0; j < $scope.table_cols; j++) {
+        var current = start + i * $scope.table_cols + j;
+        if (current >= $scope.characters.length) {
+          return;
+        }
+        else {
+          $scope.table[i][j] = characters[current];
+        }
+      }
+    }
+    console.log($scope.table);
   }
 });
 app.controller("decomposeController", function($scope, $http) {
