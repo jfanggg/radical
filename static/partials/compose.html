@@ -2,7 +2,7 @@
     <div id="compose-container">
         <div class="page">
             <h2>Select a template:</h2>
-            <h4> {{ titles[kind - 1] }} </h4>
+            <h4>{{ titles[kind - 1] }}</h4>
             <form id="compose-kinds-form">
                 <span ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
                     <label class="compose-kinds-label">
@@ -13,6 +13,7 @@
             </form>
             
             <h2>Enter component(s):</h2>
+            <h4>Light gray is part 1, dark gray is part 2</h4>
             <div id="compose-parts-container">
                 <div class="compose-parts">
                   <p>Part 1:
@@ -27,20 +28,32 @@
                 </div>
             </div>
 
+            <hr/>
+
             <h2>Results: </h2>
+            <h4> {{ characters.length > 0 ? 
+                    "Showing characters " + characters_start + " to " + characters_end : 
+                    "No results to show" }}
+            </h4>
+
             <div id="compose-results">
-              <table id="compose-results-table">
-                  <tbody>
-                      <tr ng-repeat="row in table">
-                          <!-- "track by $index" for duplicate ""s -->
-                          <td ng-repeat="char in row track by $index" 
-                              ng-class="{ 'compose-results-no-border' : char  == '',
-                                          'compose-results-border'    : char !== '' }">
-                            {{ char }}
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
+                <div id="compose-results-left">
+                    <img src="/static/img/left.png"> 
+                </div>
+                <table id="compose-results-table">
+                    <tbody>
+                        <tr ng-repeat="row in table">
+                            <!-- "track by $index" for duplicate ""s -->
+                            <td ng-repeat="char in row track by $index" 
+                                class="compose-results-border">
+                              {{ char }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="compose-results-right">
+                    <img src="/static/img/right.png"> 
+                </div>
             </div>
 
         </div>

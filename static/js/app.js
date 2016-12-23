@@ -6,10 +6,10 @@ app.config(["$routeProvider",
   function($routeProvider) {
     $routeProvider.
       when("/", {
-        /*templateUrl: "/static/partials/index.html",
-        controller: "indexController"*/
-        templateUrl: "/static/partials/compose.html",
-        controller: "composeController"
+        templateUrl: "/static/partials/index.html",
+        controller: "indexController"
+        /*templateUrl: "/static/partials/compose.html",
+        controller: "composeController"*/
       }).
       when("/compose", {
         templateUrl: "/static/partials/compose.html",
@@ -68,6 +68,7 @@ app.controller("composeController", function($scope, $http) {
   
   // functions
   $scope.clearTable = function() {
+    /* $scope.table = []; */
     for (var i = 0; i < $scope.table_rows; i++) {
       for (var j = 0; j < $scope.table_cols; j++) {
         $scope.table[i][j] = "";
@@ -75,11 +76,11 @@ app.controller("composeController", function($scope, $http) {
     }
   }
 
-  $scope.loadTable = function(start) {
+  $scope.loadTable = function() {
     $scope.clearTable();
     for (var i = 0; i < $scope.table_rows; i++) {
       for (var j = 0; j < $scope.table_cols; j++) {
-        var current = start + i * $scope.table_cols + j;
+        var current = i * $scope.table_cols + j;
 
         // If you don't have enough characters, break early
         if (current >= $scope.characters.length) {
@@ -88,29 +89,41 @@ app.controller("composeController", function($scope, $http) {
           return;
         }
         else {
+          /*if ($scope.table.length == i) {
+              $scope.table.push(new Array(10).fill(""));
+          }*/
+          // $scope.table[i].push($scope.characters[current]);
           $scope.table[i][j] = $scope.characters[current];
         }
       }
     }
   };
 
-  $scope.composeCharacters = function() {
-    console.log("table length is " + $scope.table.length);
+  $scope.composeCharacters = function(start) {
+    // default argument
+    if (typeof(start) == "undefined") {
+        start = 0;
+    }
+
     var url = "/api/chars/?";
     if ($scope.kind !== 0) {
-      url += "kind=" + $scope.kind.toString() + "&";
+        url += "kind=" + $scope.kind.toString() + "&";
     }
     if ($scope.part1 !== "") {
-      url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
+        url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
     }
     if ($scope.part2 !== "") {
-      url += "part2=" + $scope.part2.charCodeAt(0).toString();
+        url += "part2=" + $scope.part2.charCodeAt(0).toString() + "&";
     }
+    url += "start=" + start;
+    
 
     $http.get(url)
     .then(function (response) { 
       $scope.characters = response.data.characters;
-      $scope.loadTable(0);
+      $scope.characters_start = start + 1;
+      $scope.characters_end = $scope.characters.length;
+      $scope.loadTable();
     });
   };
 
