@@ -8,8 +8,6 @@ app.config(["$routeProvider",
       when("/", {
         templateUrl: "/static/partials/index.html",
         controller: "indexController"
-        /*templateUrl: "/static/partials/compose.html",
-        controller: "composeController"*/
       }).
       when("/compose", {
         templateUrl: "/static/partials/compose.html",
@@ -50,9 +48,12 @@ app.controller("composeController", function($scope, $http) {
   $scope.table_rows = 5;
   $scope.table_cols = 10;
 
-  // current state of the table
+  /* current state */
+  // where the table starts and ends (1-indexed)
   $scope.characters_start = 0;
-  $scope.characters_end = 50;
+  $scope.characters_end = 0;
+  // how many characters there are total that match the current filter
+  $scope.num_characters = 0;
 
   // input
   $scope.kind = 1;
@@ -67,8 +68,19 @@ app.controller("composeController", function($scope, $http) {
   }
   
   // functions
+
+  $scope.getResultsMessage = function() {
+    if ($scope.characters.length > 0) {
+      return "Showing characters " + $scope.characters_start + "~" + 
+              $scope.characters_end + " out of " + $scope.num_characters +
+              " matches"
+    }
+    else {
+      return "No matches to show"
+    }
+  }
+
   $scope.clearTable = function() {
-    /* $scope.table = []; */
     for (var i = 0; i < $scope.table_rows; i++) {
       for (var j = 0; j < $scope.table_cols; j++) {
         $scope.table[i][j] = "";
@@ -84,50 +96,87 @@ app.controller("composeController", function($scope, $http) {
 
         // If you don't have enough characters, break early
         if (current >= $scope.characters.length) {
-          console.log(current);
-          console.log($scope.characters.length);
           return;
         }
-        else {
-          /*if ($scope.table.length == i) {
-              $scope.table.push(new Array(10).fill(""));
-          }*/
-          // $scope.table[i].push($scope.characters[current]);
-          $scope.table[i][j] = $scope.characters[current];
-        }
+
+        $scope.table[i][j] = $scope.characters[current];
       }
     }
   };
 
   $scope.composeCharacters = function(start) {
-    // default argument
-    if (typeof(start) == "undefined") {
-        start = 0;
-    }
+      // default argument
+      if (typeof(start) == "undefined") {
+          start = 0;
+      }
 
-    var url = "/api/chars/?";
-    if ($scope.kind !== 0) {
-        url += "kind=" + $scope.kind.toString() + "&";
-    }
-    if ($scope.part1 !== "") {
-        url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
-    }
-    if ($scope.part2 !== "") {
-        url += "part2=" + $scope.part2.charCodeAt(0).toString() + "&";
-    }
-    url += "start=" + start;
-    
+      var url = "/api/chars/?";
+      if ($scope.kind !== 0) {
+          url += "kind=" + $scope.kind.toString() + "&";
+      }
+      if ($scope.part1 !== "") {
+          url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
+      }
+      if ($scope.part2 !== "") {
+          url += "part2=" + $scope.part2.charCodeAt(0).toString() + "&";
+      }
+      url += "start=" + start;
+      
 
-    $http.get(url)
-    .then(function (response) { 
-      $scope.characters = response.data.characters;
-      $scope.characters_start = start + 1;
-      $scope.characters_end = $scope.characters.length;
-      $scope.loadTable();
-    });
+      $http.get(url)
+      .then(function (response) { 
+          $scope.characters = response.data.characters;
+          $scope.num_characters = response.data.num_characters;
+
+          $scope.characters_start = start + 1;
+          $scope.characters_end = $scope.characters_start + $scope.characters.length - 1;
+
+          $scope.loadTable();
+      });
+  };
+  
+  $scope.canShiftLeft = function() {
+      return $scope.characters_start > 1;
+  }
+
+  $scope.shiftLeft = function() {
+      if (!$scope.canShiftLeft()) {
+        return;
+      }
+      var new_start = Math.max(0, $scope.characters_start - $scope.max_table_characters - 1);
+      $scope.composeCharacters(new_start);
   };
 
-  // call method once initially
+  $scope.getLeftImg = function() {
+      if ($scope.canShiftLeft()) {
+          return '/static/img/left.png';
+      }
+      else {
+          return '/static/img/left-disabled.png';
+      }
+  }
+
+  $scope.canShiftRight = function() {
+      return $scope.characters_end < $scope.num_characters;
+  }
+
+  $scope.shiftRight = function() {
+      if (!$scope.canShiftRight()) {
+          return;
+      }
+      $scope.composeCharacters($scope.characters_end);
+  };
+
+  $scope.getRightImg = function() {
+      if ($scope.canShiftRight()) {
+          return '/static/img/right.png';
+      }
+      else {
+          return '/static/img/right-disabled.png';
+      }
+  }
+
+  // load table initially
   $scope.composeCharacters();
 });
 

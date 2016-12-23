@@ -78,10 +78,11 @@ class CharactersResource(Resource):
 
     characters_set = db.find_characters(kind, part1, part2)
     characters = chr_list([character.cp for character in characters_set])
-    characters = slice_list(characters, start, start + MAX_RESULTS)
+    characters = slice_list(characters, start, MAX_RESULTS)
 
     return {
-      "characters": characters
+      "characters": characters,
+      "num_characters": len(characters_set)
     }
 
 @app.route("/")

@@ -6,24 +6,29 @@
             <form id="compose-kinds-form">
                 <span ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
                     <label class="compose-kinds-label">
-                        <input type="radio" name="kind" ng-change="composeCharacters()" ng-model="$parent.kind" value="{{ i }}">
-                        <img src="{{ '/static/img/kind' + i + '.png' }}" title="{{ $parent.titles[i - 1] }}">
+                        <input type="radio" name="kind" 
+                               ng-change="composeCharacters()" 
+                               ng-model="$parent.kind" value="{{ i }}">
+                        <img src="{{ '/static/img/kind' + i + '.png' }}" 
+                             title="{{ $parent.titles[i - 1] }}">
                     </label>
                 </span>
             </form>
             
             <h2>Enter component(s):</h2>
-            <h4>Light gray is part 1, dark gray is part 2</h4>
+            <h4>* light gray is part 1, dark gray is part 2</h4>
             <div id="compose-parts-container">
                 <div class="compose-parts">
                   <p>Part 1:
-                    <input type="text" placeholder="女" ng-change="composeCharacters()" ng-model="part1"/>
+                    <input type="text" placeholder="女" 
+                           ng-change="composeCharacters()" ng-model="part1"/>
                   </p>
                 </div>
 
                 <div class="compose-parts">
                   <p>Part 2:
-                    <input type="text" placeholder="子" ng-change="composeCharacters()" ng-model="part2"/>
+                    <input type="text" placeholder="子" 
+                           ng-change="composeCharacters()" ng-model="part2"/>
                   </p>
                 </div>
             </div>
@@ -31,14 +36,13 @@
             <hr/>
 
             <h2>Results: </h2>
-            <h4> {{ characters.length > 0 ? 
-                    "Showing characters " + characters_start + " to " + characters_end : 
-                    "No results to show" }}
-            </h4>
+            <h4>{{ getResultsMessage() }}</h4>
 
             <div id="compose-results">
-                <div id="compose-results-left">
-                    <img src="/static/img/left.png"> 
+                <div class="compose-results-arrow">
+                    <input ng-click="shiftLeft()" type="image"
+                           ng-disabled="!canShiftLeft()"
+                           ng-src="{{ getLeftImg() }}"/>
                 </div>
                 <table id="compose-results-table">
                     <tbody>
@@ -51,11 +55,12 @@
                         </tr>
                     </tbody>
                 </table>
-                <div id="compose-results-right">
-                    <img src="/static/img/right.png"> 
+                <div class="compose-results-arrow">
+                    <input ng-click="shiftRight()" type="image"
+                           ng-disabled="!canShiftRight()"
+                           ng-src="{{ getRightImg() }}"/>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
