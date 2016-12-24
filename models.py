@@ -34,11 +34,11 @@ class Database:
     """ Finds a specific character using a code point """
     return self.characters.get(cp, None)
     
-  def find_characters(self, kind=None, part1=None, part2=None):
+  def find_characters(self, kind=-1, part1=None, part2=None):
     """ Finds a set of characters given certain criteria """
     matches = set(self.characters.values())
 
-    if kind:
+    if kind != -1:
       matches &= set(self.kind_map[kind])
 
     if part1:

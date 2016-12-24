@@ -65,7 +65,7 @@ class CharactersResource(Resource):
   """ resource for looking up a set of characters via parameters. """
 
   characters_args = {
-    "kind": fields.Int(validate=validate.Range(min=1, max=11)),
+    "kind": fields.Int(validate=validate.Range(min=0, max=10)),
     "part1": fields.String(),
     "part2": fields.String(),
     "start": fields.Int(missing=0)

@@ -47,7 +47,7 @@ div[ng-controller="indexController"] {
     text-align: center;
     
     
-    overflow: hidden;/* Avoid 0 height due to floated elements */
+    overflow: hidden; /* Avoid 0 height due to floated elements */
 }
 
 #index-left {
@@ -177,11 +177,48 @@ div[ng-controller="composeController"] {
     font-size: 28px;
 }
 
-.compose-results-border {
+.compose-results-cell {
     border: 1px solid #e0e0e0;
     border-collapse: collapse;
 }
 
-.compose-results-no-border {
-    border: 1px solid transparent;
+.clickable {
+    cursor: pointer;
+}
+
+#compose-character {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#compose-character-inner {
+    display: inline-block;
+    overflow: hidden; /* Avoid 0 height due to floated elements */
+}
+
+#compose-character-hanzi {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #e0e0e0;
+
+    font-size: 216px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    float: left;
+}
+
+#compose-character-description {
+    float: left;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#compose-character-description h3:first-child {
+    margin-top: 0px;
+}
+
+#compose-character-links {
+    list-style-position: inside; /* Makes bullets appear inside the div */
 }

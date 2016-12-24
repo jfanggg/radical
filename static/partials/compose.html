@@ -2,15 +2,15 @@
     <div id="compose-container">
         <div class="page">
             <h2>Select a template:</h2>
-            <h4>{{ titles[kind - 1] }}</h4>
+            <h4>{{ titles[kind] }}</h4>
             <form id="compose-kinds-form">
-                <span ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]">
+                <span ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
                     <label class="compose-kinds-label">
                         <input type="radio" name="kind" 
                                ng-change="composeCharacters()" 
                                ng-model="$parent.kind" value="{{ i }}">
-                        <img src="{{ '/static/img/kind' + i + '.png' }}" 
-                             title="{{ $parent.titles[i - 1] }}">
+                        <img ng-src="{{ '/static/img/kind' + i + '.png' }}" 
+                             ng-attr-title="{{ $parent.titles[i] }}">
                     </label>
                 </span>
             </form>
@@ -25,7 +25,7 @@
                   </p>
                 </div>
 
-                <div class="compose-parts">
+                <div class="compose-parts" ng-show="hasPart2[kind]">
                   <p>Part 2:
                     <input type="text" placeholder="子" 
                            ng-change="composeCharacters()" ng-model="part2"/>
@@ -37,28 +37,77 @@
 
             <h2>Results: </h2>
             <h4>{{ getResultsMessage() }}</h4>
-
-            <div id="compose-results">
-                <div class="compose-results-arrow">
-                    <input ng-click="shiftLeft()" type="image"
-                           ng-disabled="!canShiftLeft()"
-                           ng-src="{{ getLeftImg() }}"/>
+            <div id="table-view">
+                <div id="compose-results" ng-show="table_mode">
+                    <div class="compose-results-arrow">
+                        <input type="image" value="" 
+                               ng-click="shiftLeft()"
+                               ng-disabled="!canShiftLeft()"
+                               ng-src="{{ getLeftImg() }}"
+                               />
+                    </div>
+                    <table id="compose-results-table">
+                        <tbody>
+                            <tr ng-repeat="row in table">
+                                <!-- "track by $index" for duplicate ""s -->
+                                <td ng-repeat="char in row track by $index" 
+                                    ng-click="char == '' || 
+                                              $parent.$parent.focus(char)"
+                                    ng-style="char == '' && {} ||
+                                              { 'cursor': 'pointer' }"
+                                    class="compose-results-cell">
+                                  {{ char }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="compose-results-arrow">
+                        <input type="image" value=""
+                               ng-click="shiftRight()"
+                               ng-disabled="!canShiftRight()"
+                               ng-src="{{ getRightImg() }}"
+                               />
+                    </div>
                 </div>
-                <table id="compose-results-table">
-                    <tbody>
-                        <tr ng-repeat="row in table">
-                            <!-- "track by $index" for duplicate ""s -->
-                            <td ng-repeat="char in row track by $index" 
-                                class="compose-results-border">
-                              {{ char }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="compose-results-arrow">
-                    <input ng-click="shiftRight()" type="image"
-                           ng-disabled="!canShiftRight()"
-                           ng-src="{{ getRightImg() }}"/>
+            </div>
+            <div id="character-view">
+                <div id="compose-character" ng_show="!table_mode">
+                    <div id="compose-character-inner">
+                        <div id="compose-character-hanzi">
+                            {{ focused_character }}
+                        </div>
+                        <div id="compose-character-description">
+                            <h3>Options:</h3>
+                                <button id="compose-back-button"
+                                        class="btn btn-default"
+                                        ng-click="unfocus()">
+                                    Go back
+                                </button>
+                                <button id="compose-decompose-button"
+                                        class="btn btn-default">
+                                    Decompose this
+                                </button>
+                            <h3>External links:</h3>
+                            <ul id="compose-character-links">
+                                <li>
+                                    <a ng-href="{{ getLINE() }}"
+                                       target="_blank">LINE Dict</a>
+                                </li>
+                                <li>
+                                    <a ng-href="{{ getGoogle() }}"
+                                       target="_blank">Google Translate</a>
+                                </li>
+                                <li>
+                                    <a ng-href="{{ getYB() }}" 
+                                       target="_blank">YellowBridge</a>
+                                </li>
+                                <li>
+                                    <a ng-href="{{ getMDBG() }}" 
+                                       target="_blank">MDBG</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

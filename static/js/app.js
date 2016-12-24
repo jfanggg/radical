@@ -44,45 +44,58 @@ app.controller("composeController", function($scope, $http) {
       "Graphical superposition or addition", 
       "Deformed version of another character"
   ];
-  $scope.max_table_characters = 50;
-  $scope.table_rows = 5;
-  $scope.table_cols = 10;
+  $scope.hasPart2 = [
+      false, true, true, true, true, true, false, false, true, true, false
+  ];
+  $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
+  $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
+  $scope.ybUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
+  $scope.mdbgUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
 
-  /* current state */
+  $scope.tableRows = 5;
+  $scope.tableCols = 10;
+
+  // current state
   // where the table starts and ends (1-indexed)
-  $scope.characters_start = 0;
+  $scope.charactersStart = 0;
   $scope.characters_end = 0;
   // how many characters there are total that match the current filter
   $scope.num_characters = 0;
+  $scope.table_mode = true;
+  $scope.focused_character = "";
 
   // input
-  $scope.kind = 1;
+  $scope.kind = 0;
   $scope.part1 = "";
   $scope.part2 = "";
 
   // output
   $scope.characters = [];
   $scope.table = [];
-  for (var i = 0; i < $scope.table_rows; i++) {
+  for (var i = 0; i < $scope.tableRows; i++) {
       $scope.table.push(new Array(10).fill(""));
   }
   
   // functions
-
   $scope.getResultsMessage = function() {
-    if ($scope.characters.length > 0) {
-      return "Showing characters " + $scope.characters_start + "~" + 
-              $scope.characters_end + " out of " + $scope.num_characters +
-              " matches"
-    }
+    if ($scope.table_mode) {
+        if ($scope.characters.length > 0) {
+          return "Displaying characters " + $scope.charactersStart + "~" + 
+                  $scope.characters_end + " out of " + $scope.num_characters +
+                  " matches. Click for more options"
+        }
+        else {
+          return "No matches to show"
+        }
+    } 
     else {
-      return "No matches to show"
+      return "Displaying character \"" + $scope.focused_character + "\"";
     }
   }
 
   $scope.clearTable = function() {
-    for (var i = 0; i < $scope.table_rows; i++) {
-      for (var j = 0; j < $scope.table_cols; j++) {
+    for (var i = 0; i < $scope.tableRows; i++) {
+      for (var j = 0; j < $scope.tableCols; j++) {
         $scope.table[i][j] = "";
       }
     }
@@ -90,9 +103,9 @@ app.controller("composeController", function($scope, $http) {
 
   $scope.loadTable = function() {
     $scope.clearTable();
-    for (var i = 0; i < $scope.table_rows; i++) {
-      for (var j = 0; j < $scope.table_cols; j++) {
-        var current = i * $scope.table_cols + j;
+    for (var i = 0; i < $scope.tableRows; i++) {
+      for (var j = 0; j < $scope.tableCols; j++) {
+        var current = i * $scope.tableCols + j;
 
         // If you don't have enough characters, break early
         if (current >= $scope.characters.length) {
@@ -111,9 +124,7 @@ app.controller("composeController", function($scope, $http) {
       }
 
       var url = "/api/chars/?";
-      if ($scope.kind !== 0) {
-          url += "kind=" + $scope.kind.toString() + "&";
-      }
+      url += "kind=" + $scope.kind.toString() + "&";
       if ($scope.part1 !== "") {
           url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
       }
@@ -128,23 +139,35 @@ app.controller("composeController", function($scope, $http) {
           $scope.characters = response.data.characters;
           $scope.num_characters = response.data.num_characters;
 
-          $scope.characters_start = start + 1;
-          $scope.characters_end = $scope.characters_start + $scope.characters.length - 1;
+          $scope.charactersStart = start + 1;
+          $scope.characters_end = $scope.charactersStart + $scope.characters.length - 1;
 
+          $scope.table_mode = true;
           $scope.loadTable();
       });
   };
+
+  $scope.focus = function(character) {
+      $scope.focused_character = character;
+      $scope.table_mode = false;
+  }
+  
+  $scope.unfocus = function() {
+      $scope.table_mode = true;
+  }
   
   $scope.canShiftLeft = function() {
-      return $scope.characters_start > 1;
+      return $scope.charactersStart > 1;
   }
 
   $scope.shiftLeft = function() {
       if (!$scope.canShiftLeft()) {
         return;
       }
-      var new_start = Math.max(0, $scope.characters_start - $scope.max_table_characters - 1);
-      $scope.composeCharacters(new_start);
+      var start = $scope.charactersStart - $scope.tableRows * $scope.tableCols
+                  - 1;
+      start = Math.max(0, start); // if you get unaligned for whatever reason
+      $scope.composeCharacters(start);
   };
 
   $scope.getLeftImg = function() {
@@ -170,10 +193,22 @@ app.controller("composeController", function($scope, $http) {
   $scope.getRightImg = function() {
       if ($scope.canShiftRight()) {
           return '/static/img/right.png';
-      }
-      else {
+      } else {
           return '/static/img/right-disabled.png';
       }
+  }
+
+  $scope.getLINE = function() {
+      return $scope.lineUrl + $scope.focused_character;
+  }
+  $scope.getGoogle = function() {
+      return $scope.googleUrl + $scope.focused_character;
+  }
+  $scope.getYB = function() {
+      return $scope.ybUrl + $scope.focused_character;
+  }
+  $scope.getMDBG = function() {
+      return $scope.mdbgUrl + $scope.focused_character;
   }
 
   // load table initially

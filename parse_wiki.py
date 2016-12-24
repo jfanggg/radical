@@ -16,10 +16,10 @@ input_path = "resources/wiki_raw.txt"
 output_path = "resources/wiki_processed.txt"
 
 composition_kinds = {
-  "一": 1, "吅": 2, "吕": 3,
-  "回": 4, "咒": 5, "弼": 6,
-  "品": 7, "叕": 8, "冖": 9,
-  "+": 10, "*": 11
+  "一": 0, "吅": 1, "吕": 2,
+  "回": 3, "咒": 4, "弼": 5,
+  "品": 6, "叕": 7, "冖": 8,
+  "+": 9, "*": 10
 }
 
 def process_line(line):
