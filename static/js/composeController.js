@@ -1,36 +1,4 @@
-"use strict";
-
-var app = angular.module("app", ["ngRoute"]);
-
-app.config(["$routeProvider",
-  function($routeProvider) {
-    $routeProvider.
-      when("/", {
-        templateUrl: "/static/partials/index.html",
-        controller: "indexController"
-      }).
-      when("/compose", {
-        templateUrl: "/static/partials/compose.html",
-        controller: "composeController"
-      }).
-      when("/decompose", {
-        templateUrl: "/static/partials/decompose.html",
-        controller: "decomposeController"
-      }).
-      when("/about", {
-        templateUrl: "/static/partials/about.html",
-        controller: "aboutController"
-      }).
-      otherwise({
-        redirectTo: "/"
-      });
-  }]);
-
-app.controller("indexController", function($scope) {
-
-});
-/*
-app.controller("composeController", function($scope, $http) {    
+angular.module("app").controller("composeController", function($scope, $http) {    
   // constants 
   $scope.titles = [
       "Graphical primitive. Non-composition", 
@@ -214,25 +182,4 @@ app.controller("composeController", function($scope, $http) {
 
   // load table initially
   $scope.composeCharacters();
-});
-*/
-
-app.controller("decomposeController", function($scope, $http) {
-  // input
-  $scope.character = "";
-
-  // output
-  $scope.kind = 0;
-  $scope.part1 = "";
-  $scope.part2 = "";
-
-  $scope.decomposeCharacter = function() {
-    var cp = $scope.character.charCodeAt(0);
-    $http.get("/api/char/" + cp.toString())
-    .then(function (response) { 
-      $scope.kind = response.data.kind;
-      $scope.part1 = response.data.part1;
-      $scope.part2 = response.data.part2;
-    });
-  };
 });
