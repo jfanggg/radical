@@ -182,10 +182,6 @@ div[ng-controller="composeController"] {
     border-collapse: collapse;
 }
 
-.clickable {
-    cursor: pointer;
-}
-
 #compose-character {
     text-align: center;
     margin-top: 20px;

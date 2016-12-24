@@ -38,7 +38,7 @@
             <h2>Results: </h2>
             <h4>{{ getResultsMessage() }}</h4>
             <div id="table-view">
-                <div id="compose-results" ng-show="table_mode">
+                <div id="compose-results" ng-show="tableMode">
                     <div class="compose-results-arrow">
                         <input type="image" value="" 
                                ng-click="shiftLeft()"
@@ -71,10 +71,10 @@
                 </div>
             </div>
             <div id="character-view">
-                <div id="compose-character" ng_show="!table_mode">
+                <div id="compose-character" ng_show="!tableMode">
                     <div id="compose-character-inner">
                         <div id="compose-character-hanzi">
-                            {{ focused_character }}
+                            {{ focusedCharacter }}
                         </div>
                         <div id="compose-character-description">
                             <h3>Options:</h3>

@@ -58,11 +58,11 @@ app.controller("composeController", function($scope, $http) {
   // current state
   // where the table starts and ends (1-indexed)
   $scope.charactersStart = 0;
-  $scope.characters_end = 0;
+  $scope.charactersEnd = 0;
   // how many characters there are total that match the current filter
-  $scope.num_characters = 0;
-  $scope.table_mode = true;
-  $scope.focused_character = "";
+  $scope.numCharacters = 0;
+  $scope.tableMode = true;
+  $scope.focusedCharacter = "";
 
   // input
   $scope.kind = 0;
@@ -78,10 +78,10 @@ app.controller("composeController", function($scope, $http) {
   
   // functions
   $scope.getResultsMessage = function() {
-    if ($scope.table_mode) {
+    if ($scope.tableMode) {
         if ($scope.characters.length > 0) {
           return "Displaying characters " + $scope.charactersStart + "~" + 
-                  $scope.characters_end + " out of " + $scope.num_characters +
+                  $scope.charactersEnd + " out of " + $scope.numCharacters +
                   " matches. Click for more options"
         }
         else {
@@ -89,7 +89,7 @@ app.controller("composeController", function($scope, $http) {
         }
     } 
     else {
-      return "Displaying character \"" + $scope.focused_character + "\"";
+      return "Displaying character \"" + $scope.focusedCharacter + "\"";
     }
   }
 
@@ -137,23 +137,23 @@ app.controller("composeController", function($scope, $http) {
       $http.get(url)
       .then(function (response) { 
           $scope.characters = response.data.characters;
-          $scope.num_characters = response.data.num_characters;
+          $scope.numCharacters = response.data.num_characters;
 
           $scope.charactersStart = start + 1;
-          $scope.characters_end = $scope.charactersStart + $scope.characters.length - 1;
+          $scope.charactersEnd = $scope.charactersStart + $scope.characters.length - 1;
 
-          $scope.table_mode = true;
+          $scope.tableMode = true;
           $scope.loadTable();
       });
   };
 
   $scope.focus = function(character) {
-      $scope.focused_character = character;
-      $scope.table_mode = false;
+      $scope.focusedCharacter = character;
+      $scope.tableMode = false;
   }
   
   $scope.unfocus = function() {
-      $scope.table_mode = true;
+      $scope.tableMode = true;
   }
   
   $scope.canShiftLeft = function() {
@@ -180,14 +180,14 @@ app.controller("composeController", function($scope, $http) {
   }
 
   $scope.canShiftRight = function() {
-      return $scope.characters_end < $scope.num_characters;
+      return $scope.charactersEnd < $scope.numCharacters;
   }
 
   $scope.shiftRight = function() {
       if (!$scope.canShiftRight()) {
           return;
       }
-      $scope.composeCharacters($scope.characters_end);
+      $scope.composeCharacters($scope.charactersEnd);
   };
 
   $scope.getRightImg = function() {
@@ -199,16 +199,16 @@ app.controller("composeController", function($scope, $http) {
   }
 
   $scope.getLINE = function() {
-      return $scope.lineUrl + $scope.focused_character;
+      return $scope.lineUrl + $scope.focusedCharacter;
   }
   $scope.getGoogle = function() {
-      return $scope.googleUrl + $scope.focused_character;
+      return $scope.googleUrl + $scope.focusedCharacter;
   }
   $scope.getYB = function() {
-      return $scope.ybUrl + $scope.focused_character;
+      return $scope.ybUrl + $scope.focusedCharacter;
   }
   $scope.getMDBG = function() {
-      return $scope.mdbgUrl + $scope.focused_character;
+      return $scope.mdbgUrl + $scope.focusedCharacter;
   }
 
   // load table initially
