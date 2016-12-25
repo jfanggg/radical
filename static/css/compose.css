@@ -1,21 +1,16 @@
+/*
 div[ng-controller="composeController"] {
     height: 100%;
 }
 
-#comose-container {
+#compose-container {
     height: 100%;
-}
+}*/
 
-#compose-kind-container {
-    text-align: center;
-}
-
-#compose-kind-container img {
-    width: 86px;
-    height: 86px;
-    
-    padding: 2px;
-    border: 1px solid transparent;
+#compose-container h2:first-child {
+    /* prevent some strange behavior that pushes ng-view down 20px */
+    margin-top: 0px;
+    padding-top: 20px;
 }
 
 #compose-kinds-form {

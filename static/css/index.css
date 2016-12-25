@@ -21,20 +21,6 @@ div[ng-controller="indexController"] {
     color: #303030;
     background-color: #f5f5f5;
 }
-#index-left-title {
-    position: absolute;
-    width: 100%;
-}
-#index-left-content {
-    width: 100%;
-    height: 100%;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
 #index-right {
     float: right;
     
@@ -45,11 +31,12 @@ div[ng-controller="indexController"] {
     color: #f5f5f5;
     background-color: #303030;
 }
-#index-right-title {
+
+#index-left-title, #index-right-title {
     position: absolute;
     width: 100%;
 }
-#index-right-content {
+#index-left-content, #index-right-content {
     width: 100%;
     height: 100%;
     
