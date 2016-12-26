@@ -32,3 +32,16 @@ body{
 div[ng-view] {
     height: 100%;
 }
+
+
+/* small screens */
+@media (max-width:768px) {
+    .navbar .page {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #wide-view-navigation {
+        display: none;
+    }
+}
