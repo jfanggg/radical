@@ -4,15 +4,18 @@
             <h2>Select a template:</h2>
             <h4>{{ titles[kind] }}</h4>
             <form id="compose-kinds-form">
-                <span ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-                    <label class="compose-kinds-label">
-                        <input type="radio" name="kind" 
-                               ng-change="composeCharacters()" 
-                               ng-model="$parent.kind" value="{{ i }}">
-                        <img ng-src="{{ '/static/img/kind' + i + '.png' }}" 
-                             ng-attr-title="{{ $parent.titles[i] }}">
-                    </label>
-                </span>
+                <div id="compose-kinds-container">
+                    <div class="compose-kinds-div" 
+                         ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+                        <label class="compose-kinds-label">
+                            <input type="radio" name="kind" 
+                                   ng-change="composeCharacters()" 
+                                   ng-model="$parent.kind" value="{{ i }}">
+                            <img ng-src="{{ '/static/img/kind' + i + '.png' }}" 
+                                 ng-attr-title="{{ $parent.titles[i] }}">
+                        </label>
+                    </div>
+                </div>
             </form>
             
             <h2>Enter component(s):</h2>
