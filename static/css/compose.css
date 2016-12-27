@@ -15,10 +15,6 @@
     display: table-cell;  
 }
 
-.compose-kinds-div {
-    float: left;
-}
-
 .compose-kinds-label {
     margin-bottom: 0px; /* for some reason there was extra margins at the bottom */
 }
