@@ -32,6 +32,12 @@ div[ng-controller="indexController"] {
     background-color: #303030;
 }
 
+#index-left-title {
+    padding-right: 10px;
+}
+#index-right-title {
+    padding-left: 10px;
+}
 #index-left-title, #index-right-title {
     position: absolute;
     width: 100%;

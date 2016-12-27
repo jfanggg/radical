@@ -1,13 +1,59 @@
 <div ng-controller="decomposeController">
-  <p>
-    Enter character: 
-    <input type="text" placeholder="愛" ng-model="character"/>
-  </p>
-  <button ng-click="decomposeCharacter()">Submit</button>
-
-  <p>Kind  is {{ kind }}</p>
-  <p>Part1 is {{ part1 }}</p>
-  <p>Part2 is {{ part2 }}</p>
+    <div id="decompose-container">
+        <div class="page">
+            <h2>Enter character:</h2>
+            <div class="fluid-container">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <input class="form-control input-lg" type="text" placeholder="愛" 
+                                   ng-change="decomposeCharacter()" ng- model="character"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <hr>
+            <h2>Details:</h2>
+            <div class="decompose-details-container" class="fluid-container">
+                <div class="row border-between">
+                    <div class="col-xs-4">
+                        <h3>Kind</h3>
+                        <img ng-src="{{ '/static/img/kind' + kind + '.png' }}" 
+                                 ng-attr-title="{{ $parent.titles[i] }}">
+                    </div>
+                    <div class="col-xs-4">
+                        <h3>Part 1</h3>
+                        <div class="decompose-part-container">
+                            <div class="decompose-part-hanzi">
+                                {{  }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <h3>Part 2</h3>
+                        <div class="decompose-part-container">
+                            <div class="decompose-part-hanzi">
+                                {{  }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="decompose-details-container" class="fluid-container">
+                <div class="row border-between">
+                    <div class="col-xs-6">
+                        <h3>Kind</h3>
+                        
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Part 1</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

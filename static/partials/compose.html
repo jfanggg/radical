@@ -40,76 +40,69 @@
 
             <h2>Results: </h2>
             <h4>{{ getResultsMessage() }}</h4>
-            <div id="table-view">
-                <div id="compose-results" ng-show="tableMode">
-                    <div class="compose-results-arrow">
-                        <input type="image" value="" 
-                               ng-click="shiftLeft()"
-                               ng-disabled="!canShiftLeft()"
-                               ng-src="{{ getLeftImg() }}"
-                               />
-                    </div>
-                    <table id="compose-results-table">
-                        <tbody>
-                            <tr ng-repeat="row in table">
-                                <!-- "track by $index" for duplicate ""s -->
-                                <td ng-repeat="char in row track by $index" 
-                                    ng-click="char == '' || 
-                                              $parent.$parent.focus(char)"
-                                    ng-style="char == '' && {} ||
-                                              { 'cursor': 'pointer' }"
-                                    class="compose-results-cell">
-                                  {{ char }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="compose-results-arrow">
-                        <input type="image" value=""
-                               ng-click="shiftRight()"
-                               ng-disabled="!canShiftRight()"
-                               ng-src="{{ getRightImg() }}"
-                               />
-                    </div>
+            <div id="compose-results" ng-show="tableMode">
+                <div class="compose-results-arrow">
+                    <input type="image" value="" 
+                           ng-click="shiftLeft()"
+                           ng-disabled="!canShiftLeft()"
+                           ng-src="{{ getLeftImg() }}"
+                           />
+                </div>
+                <table id="compose-results-table">
+                    <tbody>
+                        <tr ng-repeat="row in table">
+                            <!-- "track by $index" for duplicate ""s -->
+                            <td ng-repeat="char in row track by $index" 
+                                ng-click="char == '' || 
+                                      $parent.$parent.focus(char)"
+                                ng-style="char == '' && {} ||
+                                          { 'cursor': 'pointer' }"
+                                class="compose-results-cell">
+                              {{ char }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="compose-results-arrow">
+                <input type="image" value="" ng-click="shiftRight()" 
+                       ng-disabled="!canShiftRight()" ng-src="{{ getRightImg() }}"
+                       />
                 </div>
             </div>
-            <div id="character-view">
-                <div id="compose-character" ng_show="!tableMode">
-                    <div id="compose-character-inner">
-                        <div id="compose-character-hanzi">
-                            {{ focusedCharacter }}
-                        </div>
-                        <div id="compose-character-description">
-                            <h3>Options:</h3>
-                                <button id="compose-back-button"
-                                        class="btn btn-default"
-                                        ng-click="unfocus()">
-                                    Go back
-                                </button>
-                                <button id="compose-decompose-button"
-                                        class="btn btn-default">
-                                    Decompose this
-                                </button>
-                            <h3>External links:</h3>
-                            <ul id="compose-character-links">
-                                <li>
-                                    <a ng-href="{{ getLINE() }}"
-                                       target="_blank">LINE Dict</a>
-                                </li>
-                                <li>
-                                    <a ng-href="{{ getGoogle() }}"
-                                       target="_blank">Google Translate</a>
-                                </li>
-                                <li>
-                                    <a ng-href="{{ getYB() }}" 
-                                       target="_blank">YellowBridge</a>
-                                </li>
-                                <li>
-                                    <a ng-href="{{ getMDBG() }}" 
-                                       target="_blank">MDBG</a>
-                                </li>
-                            </ul>
-                        </div>
+            <div id="compose-character" ng_show="!tableMode">
+                <div id="compose-character-inner">
+                    <div id="compose-character-hanzi">
+                        {{ focusedCharacter }}
+                    </div>
+                    <div id="compose-character-description">
+                        <h3>Options:</h3>
+                            <button id="compose-back-button" class="btn btn-default"
+                                    ng-click="unfocus()">
+                                Go back
+                            </button>
+                            <button id="compose-decompose-button"
+                                    class="btn btn-default">
+                                Decompose this
+                            </button>
+                        <h3>External links:</h3>
+                        <ul id="compose-character-links">
+                            <li>
+                                <a ng-href="{{ getLINE() }}"
+                                   target="_blank">LINE Dict</a>
+                            </li>
+                            <li>
+                                <a ng-href="{{ getGoogle() }}"
+                                   target="_blank">Google Translate</a>
+                            </li>
+                            <li>
+                                <a ng-href="{{ getYB() }}" 
+                                   target="_blank">YellowBridge</a>
+                            </li>
+                            <li>
+                                <a ng-href="{{ getMDBG() }}" 
+                                   target="_blank">MDBG</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
