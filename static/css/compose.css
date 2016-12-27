@@ -107,9 +107,3 @@
 #compose-character-links {
     list-style-position: inside; /* Makes bullets appear inside the div */
 }
-
-@media (max-width:1000px) {
-    /*#compose-kinds-container div:nth-child(7){
-        clear: both;
-    }*/
-}

@@ -36,12 +36,37 @@ div[ng-view] {
 
 /* small screens */
 @media (max-width:768px) {
-    .navbar .page {
+    .navbar {
+        text-align: center;
+    }
+    
+    /* Make the logo centered */
+    #navbar-brand-container {
+        overflow: hidden;
         display: flex;
         justify-content: center;
     }
     
+    .navbar-brand {
+        float: none;
+    }
+    
+    /* Turn off normal menu items */
     #wide-view-navigation {
         display: none;
+    }
+    
+    /* Turn on slide in menu */
+    .navmenu-brand {
+        border-bottom: 1px solid #E7E7E7;
+    }
+    
+    #navbar-toggle-container {
+        overflow: hidden;
+        float: left;
+    }
+    
+    .navbar-toggle {
+        float: left;
     }
 }
