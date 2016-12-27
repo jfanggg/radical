@@ -1,0 +1,30 @@
+.decompose-details-container .row div {
+    text-align: center;
+}
+
+
+/* Border solution from 
+http://stackoverflow.com/questions/11815081/how-can-i-add-a-line-between-two-columns-using-twitter-bootstraps-grid-system/29341777#answer-29341777 */
+.border-between > [class*='col-']:before {
+    background: #e3e3e3;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    width: 1px;
+    top: 0;
+}
+.border-between > [class*='col-']:first-child:before {
+    display: none;
+}
+
+.decompose-part-container {
+    display: flex;
+    justify-content: center;
+}
+
+.decompose-part-hanzi {
+    width: 128px;
+    height: 128px;
+    border: 1px solid #e0e0e0;
+}
