@@ -1,7 +1,16 @@
-.decompose-details-container .row div {
-    text-align: center;
+.row.flex {
+    display: flex;
+    flex-direction: row;
 }
 
+.title-column {
+    display: flex;
+    align-items: center;
+}
+
+.detail-column {
+    text-align: center;
+}
 
 /* Border solution from 
 http://stackoverflow.com/questions/11815081/how-can-i-add-a-line-between-two-columns-using-twitter-bootstraps-grid-system/29341777#answer-29341777 */
@@ -27,4 +36,17 @@ http://stackoverflow.com/questions/11815081/how-can-i-add-a-line-between-two-col
     width: 128px;
     height: 128px;
     border: 1px solid #e0e0e0;
+
+    font-size: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.decompose-part-options {
+    text-align: left;
+}
+
+#decompose-character-links {                                                      
+    list-style-position: inside; /* Makes bullets appear inside the div */      
+} 

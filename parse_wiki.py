@@ -41,7 +41,7 @@ def process_line(line):
   parts = []
   for i in range(0, 2):
     # character(s) in part
-    parts.extend(line[ctr])
+    parts.append(line[ctr])
     ctr += 1
 
     # no. of strokes in part
@@ -58,6 +58,7 @@ def process_line(line):
 
   # radical
   radical = line[ctr]
+
 
   return [character, kind, parts[0], parts[1]]
 

@@ -15,8 +15,12 @@
     display: table-cell;  
 }
 
+#compose-kinds-container span {
+    display: inline-block;
+}
+
 .compose-kinds-label {
-    margin-bottom: 0px; /* for some reason there was extra margins at the bottom */
+    margin-bottom: 0px; /* for some reason there's margins at the bottom */
 }
 
 .compose-kinds-label > input{
