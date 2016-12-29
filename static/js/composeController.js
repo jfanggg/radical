@@ -16,10 +16,18 @@ angular.module("app").controller("composeController", function($scope, $http) {
   $scope.hasPart2 = [
       false, true, true, true, true, true, false, false, true, true, false
   ];
+  $scope.part1Names = [                                                       
+      "Whole", "Left", "Top", "Inner", "Top", "Outer", "Part", "Part",      
+      "Top", "Part", "Whole"                                                 
+  ];                                                                          
+  $scope.part2Names = [                                                       
+      "", "Right", "Bottom", "Outer", "Bottom", "Inner", "", "", "Bottom",    
+      "Part", ""                                                             
+  ] 
+  $scope.ybUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
+  $scope.hcUrl = "http://www.hanzicraft.com/character/";
   $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
   $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
-  $scope.ybUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
-  $scope.mdbgUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
 
   $scope.tableRows = 5;
   $scope.tableCols = 10;
@@ -167,17 +175,17 @@ angular.module("app").controller("composeController", function($scope, $http) {
       }
   }
 
+  $scope.getYB = function() {
+      return $scope.ybUrl + $scope.focusedCharacter;
+  }
+  $scope.getHC = function() {
+      return $scope.hcUrl + $scope.focusedCharacter;
+  }
   $scope.getLINE = function() {
       return $scope.lineUrl + $scope.focusedCharacter;
   }
   $scope.getGoogle = function() {
       return $scope.googleUrl + $scope.focusedCharacter;
-  }
-  $scope.getYB = function() {
-      return $scope.ybUrl + $scope.focusedCharacter;
-  }
-  $scope.getMDBG = function() {
-      return $scope.mdbgUrl + $scope.focusedCharacter;
   }
 
   // load table initially

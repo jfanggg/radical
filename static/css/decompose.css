@@ -3,7 +3,7 @@
     flex-direction: row;
 }
 
-.decompose-detail-column {
+.decompose-info-cell {
     text-align: center;
 }
 
@@ -14,6 +14,11 @@
 .decompose-details-container [class*='col-'] {
     padding-top: 15px;
     border-right: 1px solid #e0e0e0;
+
+    /* text-align: center;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .decompose-details-container [class*='col-']:last-child {

@@ -16,15 +16,18 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
     $scope.hasPart2 = [
         false, true, true, true, true, true, false, false, true, true, false
     ];
-    // 
     $scope.part1Names = [
-        "Whole", "Left", "Top", "Inner", "Top", "Outer", "Piece", "Piece",
-        "Top", "Piece", "Whole"
+        "Whole", "Left", "Top", "Inner", "Top", "Outer", "Part", "Part",
+        "Top", "Part", "Whole"
     ];
     $scope.part2Names = [
         "", "Right", "Bottom", "Outer", "Bottom", "Inner", "", "", "Bottom", 
-        "Piece", ""
+        "Part", ""
     ]
+    $scope.ybUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
+    $scope.hcUrl = "http://www.hanzicraft.com/character/";
+    $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
+    $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
 
     // input
     $scope.character = "你";
@@ -34,22 +37,38 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
     $scope.part1 = "";
     $scope.part2 = "";
 
-  
+    $scope.isCharacter1 = function() {
+        return $scope.part1.length == 1;
+    }
 
-    $scope.getPart1 = function() {
-        console.log($scope.part1);
-        if ($scope.part1.length == 1) {
-            return $scope.part1[0];
+    $scope.isCharacter2 = function() {
+        return $scope.part2.length == 1;
+    }
+
+    $scope.getPart = function(part, getX) {
+        if (typeof(getX) === "undefined") getX = false;
+
+        if (part.length == 1) {
+            return part[0];
+        }
+        if (getX) {
+            return "⨉";
         }
         else {
-            return "⨉";
+            var string = "";
+            for (var i = 0; i < part.length; i++) {
+                string += part[i];
+            }
+            return string;
         }
     }
 
-    $scope.getPart2 = function() {
-        if ($scope.part2.length == 1) {
-            return $scope.part2[0];
-        }
+    $scope.getPart1 = function(getX) {
+        return $scope.getPart($scope.part1, getX);
+    }
+
+    $scope.getPart2 = function(getX) {
+        return $scope.getPart($scope.part2, getX);
     }
 
     $scope.getMessage = function(part) {
@@ -59,7 +78,7 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
                 message += part[i] + ", ";
             }
             message += part[part.length - 1] 
-            message += " does not exist as a single character";
+            message += " doesn't exist as a character.";
             return message;
         }
         else {
@@ -85,6 +104,19 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
             }
         );
     };
+
+    $scope.getYB = function(character) {
+        return $scope.ybUrl + character;
+    }
+    $scope.getHC = function(character) {
+        return $scope.hcUrl + character;
+    }
+    $scope.getLINE = function(character) {
+        return $scope.lineUrl + character;
+    }
+    $scope.getGoogle = function(character) {
+        return $scope.googleUrl + character;
+    }
 
     $scope.decomposeCharacter();
 });

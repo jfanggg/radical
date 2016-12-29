@@ -19,17 +19,16 @@
             </form>
             
             <h2>Enter component(s):</h2>
-            <h4>* light gray is part 1, dark gray is part 2</h4>
             <div id="compose-parts-container">
                 <div class="compose-parts">
-                  <p>Part 1:
+                  <p>{{ part1Names[kind] }}:
                     <input type="text" placeholder="女" 
                            ng-change="composeCharacters()" ng-model="part1"/>
                   </p>
                 </div>
 
                 <div class="compose-parts" ng-show="hasPart2[kind]">
-                  <p>Part 2:
+                  <p> {{ part2Names[kind] }}:
                     <input type="text" placeholder="子" 
                            ng-change="composeCharacters()" ng-model="part2"/>
                   </p>
@@ -75,7 +74,6 @@
                         {{ focusedCharacter }}
                     </div>
                     <div id="compose-character-description">
-                        <h3>Options:</h3>
                         <button id="compose-back-button" class="btn btn-default"
                                 ng-click="unfocus()">
                             Go back
@@ -87,20 +85,20 @@
                         <h3>External links:</h3>
                         <ul id="compose-character-links">
                             <li>
+                                <a ng-href="{{ getYB() }}" 
+                                   target="_blank">YellowBridge</a>
+                            </li>
+                            <li>
+                                <a ng-href="{{ getHC() }}" 
+                                   target="_blank">HanziCraft</a>
+                            </li>
+                            <li>
                                 <a ng-href="{{ getLINE() }}"
                                    target="_blank">LINE Dict</a>
                             </li>
                             <li>
                                 <a ng-href="{{ getGoogle() }}"
                                    target="_blank">Google Translate</a>
-                            </li>
-                            <li>
-                                <a ng-href="{{ getYB() }}" 
-                                   target="_blank">YellowBridge</a>
-                            </li>
-                            <li>
-                                <a ng-href="{{ getMDBG() }}" 
-                                   target="_blank">MDBG</a>
                             </li>
                         </ul>
                     </div>
