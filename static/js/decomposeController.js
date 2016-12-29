@@ -1,4 +1,4 @@
-angular.module("app").controller("decomposeController", function($scope, $http) {
+angular.module("app").controller("decomposeController", function($scope, $http, $location) {
     // constants
     $scope.kindNames = [                                                             
         "Graphical primitive. Non-composition",                                   
@@ -30,10 +30,10 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
     $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
 
     // input
-    $scope.character = "你";
+    $scope.character = "好";
 
     // output
-    $scope.kind = -1;
+    $scope.kind = 0;
     $scope.part1 = "";
     $scope.part2 = "";
 
@@ -94,7 +94,7 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
         return $scope.getMessage($scope.part2);
     }
     
-    $scope.decomposeCharacter = function() {
+    $scope.decompose = function() {
         var cp = $scope.character.charCodeAt(0);
         $http.get("/api/char/" + cp.toString())
             .then(function (response) { 
@@ -104,6 +104,20 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
             }
         );
     };
+
+    $scope.composeKind = function() {
+        location.href = "#/compose?kind=" + $scope.kind;
+    }
+
+    $scope.composePart1 = function() {
+        location.href = "#/compose?kind=" + $scope.kind + "&part1=" + 
+                        $scope.part1;
+    }
+
+    $scope.composePart2 = function() {
+        location.href = "#/compose?kind=" + $scope.kind + "&part2=" + 
+                        $scope.part2;
+    }
 
     $scope.getYB = function(character) {
         return $scope.ybUrl + character;
@@ -118,5 +132,10 @@ angular.module("app").controller("decomposeController", function($scope, $http) 
         return $scope.googleUrl + character;
     }
 
-    $scope.decomposeCharacter();
+    // Setting things up initially
+    var params = $location.search();
+    if ("char" in params) {
+        $scope.character = params["char"];
+    }
+    $scope.decompose();
 });

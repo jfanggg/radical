@@ -7,7 +7,7 @@
                     <div class="col-xs-4">
                         <div class="form-group">
                             <input class="form-control input-lg" type="text" 
-                                   ng-change="decomposeCharacter()" 
+                                   ng-change="decompose()" 
                                    ng-model="character"/>
                         </div>
                     </div>
@@ -51,17 +51,20 @@
                 </div>
                 <div class="row decompose-row-height">
                     <div class="col-xs-4">
-                        <button id="decompose-compose1-button">
+                        <button id="decompose-compose1-button"
+                                ng-click="composeKind()">
                             Compose with type
                         </button>
                     </div>
                     <div class="col-xs-4">
-                        <button id="decompose-compose1-button">
+                        <button id="decompose-compose1-button"
+                                ng-click="composePart1()">
                             Compose with {{ getPart1() }}
                         </button>
                     </div>
                     <div class="col-xs-4">
-                        <button id="decompose-compose1-button">
+                        <button id="decompose-compose1-button"
+                                ng-click="composePart2()">
                             Compose with {{ getPart2() }}
                         </button>
                      </div>
@@ -140,16 +143,16 @@
                 </div>
                 <div class="row decompose-row-height">
                     <div class="col-xs-6">
-                        <button id="decompose-compose1-button">
+                        <button id="decompose-compose1-button"
+                            ng-click="composeKind()">
                             Compose with type
                         </button>
                     </div>
                     <div class="col-xs-6">
-                        <div>
-                            <button id="decompose-compose1-button">
-                                Compose with {{ getPart1() }}
-                            </button>
-                        </div>
+                        <button id="decompose-compose1-button"
+                            ng-click="composePart1()">
+                            Compose with {{ getPart1() }}
+                        </button>
                     </div>
                 </div>
                 <div class="row decompose-row-height">
@@ -178,23 +181,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="row">
-                    <div class="col-xs-6">
-                        <h3>Type</h3>
-                        <img ng-src="{{ '/static/img/kind' + kind + '.png' }}" 
-                             ng-attr-title="{{ kindNames[kind] }}">
-                        <h4>{{ kindNames[kind] }}</h4>
-                    </div>
-                    <div class="col-xs-6">
-                        <h3>{{ part1Names[kind] }}</h3>
-                        <div class="decompose-part-container">
-                            <div class="decompose-part-hanzi">
-                                {{ getPart1() }}
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

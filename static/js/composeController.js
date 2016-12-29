@@ -1,4 +1,4 @@
-angular.module("app").controller("composeController", function($scope, $http) {    
+angular.module("app").controller("composeController", function($scope, $http, $location) {    
   // constants 
   $scope.titles = [
       "Graphical primitive. Non-composition", 
@@ -94,7 +94,7 @@ angular.module("app").controller("composeController", function($scope, $http) {
     }
   };
 
-  $scope.composeCharacters = function(start) {
+  $scope.compose = function(start) {
       // default argument
       if (typeof(start) == "undefined") {
           start = 0;
@@ -117,13 +117,19 @@ angular.module("app").controller("composeController", function($scope, $http) {
           $scope.numCharacters = response.data.num_characters;
 
           $scope.charactersStart = start + 1;
-          $scope.charactersEnd = $scope.charactersStart + $scope.characters.length - 1;
+          $scope.charactersEnd = $scope.charactersStart + 
+                                 $scope.characters.length - 1;
 
           $scope.tableMode = true;
           $scope.loadTable();
       });
   };
 
+  $scope.decompose = function() {
+      location.href = "#/decompose?char=" + $scope.focusedCharacter;
+  }
+
+  
   $scope.focus = function(character) {
       $scope.focusedCharacter = character;
       $scope.tableMode = false;
@@ -132,7 +138,7 @@ angular.module("app").controller("composeController", function($scope, $http) {
   $scope.unfocus = function() {
       $scope.tableMode = true;
   }
-  
+
   $scope.canShiftLeft = function() {
       return $scope.charactersStart > 1;
   }
@@ -144,7 +150,7 @@ angular.module("app").controller("composeController", function($scope, $http) {
       var start = $scope.charactersStart - $scope.tableRows * $scope.tableCols
                   - 1;
       start = Math.max(0, start); // if you get unaligned for whatever reason
-      $scope.composeCharacters(start);
+      $scope.compose(start);
   };
 
   $scope.getLeftImg = function() {
@@ -164,7 +170,7 @@ angular.module("app").controller("composeController", function($scope, $http) {
       if (!$scope.canShiftRight()) {
           return;
       }
-      $scope.composeCharacters($scope.charactersEnd);
+      $scope.compose($scope.charactersEnd);
   };
 
   $scope.getRightImg = function() {
@@ -188,6 +194,16 @@ angular.module("app").controller("composeController", function($scope, $http) {
       return $scope.googleUrl + $scope.focusedCharacter;
   }
 
-  // load table initially
-  $scope.composeCharacters();
+  // Setting things up initially
+  var params = $location.search();
+  if ("kind" in params) {
+      $scope.kind = parseInt(params["kind"]);
+  }
+  if ("part1" in params) {
+      $scope.part1 = params["part1"];
+  }
+  if ("part2" in params) {
+      $scope.part2 = params["part2"];
+  }
+  $scope.compose();
 });
