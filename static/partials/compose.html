@@ -19,21 +19,18 @@
             </form>
             
             <h2>Enter component(s):</h2>
-            <div id="compose-parts-container">
-                <div class="compose-parts">
-                  <p>{{ part1Names[kind] }}:
-                    <input type="text" placeholder="女" 
-                           ng-change="compose()" ng-model="part1"/>
-                  </p>
-                </div>
-
-                <div class="compose-parts" ng-show="hasPart2[kind]">
-                  <p> {{ part2Names[kind] }}:
-                    <input type="text" placeholder="子" 
-                           ng-change="compose()" ng-model="part2"/>
-                  </p>
-                </div>
-            </div>
+                <form class="form-inline">
+                    <div class="compose-parts form-group">
+                        <p>{{ part1Names[kind] }}:</p>
+                        <input class="form-control" type="text" placeholder="女" 
+                               ng-change="compose()" ng-model="part1"/>
+                    </div>
+                    <div class="compose-parts form-group" ng-show="hasPart2[kind]">
+                        <p>{{ part2Names[kind] }}:</p>
+                        <input class="form-control" type="text" placeholder="子" 
+                               ng-change="compose()" ng-model="part2"/>
+                    </div>
+                </form>
 
             <hr/>
 
