@@ -94,19 +94,38 @@ angular.module("app").controller("composeController", function($scope, $http, $l
     }
   };
 
-  $scope.compose = function(start) {
+  $scope.compose = function(start, changedKinds) {
       // default argument
-      if (typeof(start) == "undefined") {
-          start = 0;
+      if (typeof(changedKinds) == "undefined") {
+          changedKinds = false;
+      }
+
+      // clearing inputs in certain circumstances
+      if (changedKinds) {
+          $scope.part1 = "";
+          $scope.part2 = "";
+      }
+      if (!$scope.hasPart2[$scope.kind]) {
+          $scope.part2 = "";
       }
 
       var url = "/api/chars/?";
       url += "kind=" + $scope.kind.toString() + "&";
       if ($scope.part1 !== "") {
-          url += "part1=" + $scope.part1.charCodeAt(0).toString() + "&";
+          url += "part1=";
+          for (var c of $scope.part1) {
+              url += c.codePointAt(0).toString() + "-";
+          }
+          url = url.substring(0, url.length - 1); // delete the last '-'
+          url += "&";
       }
       if ($scope.part2 !== "") {
-          url += "part2=" + $scope.part2.charCodeAt(0).toString() + "&";
+          url += "part2=";
+          for (var c of $scope.part2) {
+              url += c.codePointAt(0).toString() + "-";
+          }
+          url = url.substring(0, url.length - 1); // delete the last '-'
+          url += "&";
       }
       url += "start=" + start;
       
@@ -205,5 +224,5 @@ angular.module("app").controller("composeController", function($scope, $http, $l
   if ("part2" in params) {
       $scope.part2 = params["part2"];
   }
-  $scope.compose();
+  $scope.compose(0);
 });

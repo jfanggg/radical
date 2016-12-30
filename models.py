@@ -39,12 +39,12 @@ class Database:
     matches = set(self.characters.values())
 
     if kind != -1:
-      matches &= set(self.kind_map[kind])
+      matches &= set(self.kind_map.get(kind, []))
 
     if part1:
-      matches &= set(self.part1_map[part1])
+      matches &= set(self.part1_map.get(part1, []))
 
     if part2:
-      matches &= set(self.part2_map[part2])
+      matches &= set(self.part2_map.get(part2, []))
   
     return matches

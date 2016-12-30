@@ -9,7 +9,7 @@
                          ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
                         <label class="compose-kinds-label">
                             <input type="radio" name="kind" 
-                                   ng-change="compose()" 
+                                   ng-change="compose(0, true)" 
                                    ng-model="$parent.kind" value="{{ i }}">
                             <img ng-src="{{ '/static/img/kind' + i + '.png' }}" 
                                  ng-attr-title="{{ $parent.titles[i] }}">
@@ -23,14 +23,14 @@
                 <div class="compose-parts">
                   <p>{{ part1Names[kind] }}:
                     <input type="text" placeholder="女" 
-                           ng-change="compose()" ng-model="part1"/>
+                           ng-change="compose(0)" ng-model="part1"/>
                   </p>
                 </div>
 
                 <div class="compose-parts" ng-show="hasPart2[kind]">
                   <p> {{ part2Names[kind] }}:
                     <input type="text" placeholder="子" 
-                           ng-change="compose()" ng-model="part2"/>
+                           ng-change="compose(0)" ng-model="part2"/>
                   </p>
                 </div>
             </div>

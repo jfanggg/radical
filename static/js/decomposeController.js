@@ -111,12 +111,12 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
 
     $scope.composePart1 = function() {
         location.href = "#/compose?kind=" + $scope.kind + "&part1=" + 
-                        $scope.part1;
+                        $scope.getPart1();
     }
 
     $scope.composePart2 = function() {
         location.href = "#/compose?kind=" + $scope.kind + "&part2=" + 
-                        $scope.part2;
+                        $scope.getPart2();
     }
 
     $scope.getYB = function(character) {
