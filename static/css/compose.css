@@ -40,11 +40,7 @@
     border: 1px solid red;
 }
 
-.compose-parts {
-    margin-right: 50px;
-}
-
-.compose-parts, .compose-parts p, .compose-parts p input {
+.compose-parts, .compose-parts p {
     display: inline;
 }
 

@@ -23,12 +23,12 @@
             <form class="form-inline">
                 <div class="compose-parts form-group">
                     <p>{{ part1Names[kind] }}:</p>
-                    <input class="form-control" type="text" placeholder="女" 
+                    <input class="form-control" type="text"
                            ng-change="compose()" ng-model="part1"/>
                 </div>
                 <div class="compose-parts form-group" ng-show="hasPart2[kind]">
                     <p>{{ part2Names[kind] }}:</p>
-                    <input class="form-control" type="text" placeholder="子" 
+                    <input class="form-control" type="text"
                            ng-change="compose()" ng-model="part2"/>
                 </div>
             </form>
