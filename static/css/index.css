@@ -16,6 +16,7 @@ div[ng-controller="indexController"] {
     
     width: 50%;
     height: 100%;
+    min-height: 250px;
     position: relative;
     
     color: #303030;
@@ -26,6 +27,7 @@ div[ng-controller="indexController"] {
     
     width: 50%;
     height: 100%;
+    min-height: 250px;
     position: relative;
     
     color: #f5f5f5;
@@ -38,6 +40,7 @@ div[ng-controller="indexController"] {
 #index-right-title {
     padding-left: 10px;
 }
+
 #index-left-title, #index-right-title {
     position: absolute;
     width: 100%;
@@ -50,4 +53,37 @@ div[ng-controller="indexController"] {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+/* extra small screens */
+@media (max-width:480px) {
+    #index-container .page {
+        padding: 0px;
+    }
+    
+    /* for some reason links suddenly have underlines */
+    a:focus, a:hover {
+        text-decoration: none;
+    }
+    
+    #index-left, #index-right {
+        float: none;
+        
+        width: 100%;
+        height: 50%;
+    }
+    #index-left-title {
+        padding-left: 10px;
+    }
+    #index-right-title {
+        padding-right: 10px;
+    }
+    
+    #index-left-title h3, #index-right-title h3 {
+        font-size: 18px;
+    }
+    
+    #index-left-content h1, #index-right-content h1 {
+        font-size: 32px;
+    }
 }

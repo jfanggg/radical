@@ -22,6 +22,10 @@ body{
     height: 36px;
 }
 
+.navmenu {
+    width: 200px;
+}
+
 .navmenu-default .navmenu-brand,
 .navmenu-default .navmenu-brand:hover,
 .navmenu-default .navmenu-brand:focus {
@@ -111,3 +115,4 @@ div[ng-view] {
         float: left;
     }
 }
+
