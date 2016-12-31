@@ -44,25 +44,24 @@
     display: inline;
 }
 
-#compose-results {
+#compose-results-arrows {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.compose-results-arrow input {
-    display: block;
-}
-
-#compose-results-table td {
-    height: 80px;
-    width: 80px;
-    text-align: center;
-    font-size: 28px;
+#compose-results-arrows input {
+    height: 38px;
+    width: 38px;
 }
 
 .compose-results-cell {
+    height: 80px;
+    width: 80px;
+    
+    text-align: center;
+    font-size: 28px;
+    
     border: 1px solid #e0e0e0;
     border-collapse: collapse;
 }
@@ -102,4 +101,33 @@
 
 #compose-character-links {
     list-style-position: inside; /* Makes bullets appear inside the div */
+}
+
+.compose-results-arrow {
+    display: none;
+}
+
+
+
+/* small screens */
+@media (max-width:768px) {
+    #compose-results-arrows input {
+        height: 28px;
+        width: 28px;
+    }
+    
+    .compose-results-cell {
+        height: 70px;
+        width: 70px;
+    }
+}
+
+/* extra small screens */
+@media (max-width:480px) {
+    
+    .compose-kinds-label > input + img{
+        width: 66px;
+        height: 66px;
+    }
+    
 }

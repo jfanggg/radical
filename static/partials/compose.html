@@ -38,15 +38,22 @@
             <h2>Results: </h2>
             <h4>{{ getResultsMessage() }}</h4>
             <div id="compose-results" ng-show="tableMode">
-                <div class="compose-results-arrow">
-                    <input type="image" value="" 
-                           ng-click="shiftLeft()"
-                           ng-disabled="!canShiftLeft()"
-                           ng-src="{{ getLeftImg() }}"
-                           />
-                </div>
                 <table id="compose-results-table">
                     <tbody>
+                        <tr>
+                            <td colspan="9">
+                            </td>
+                            <td id="compose-results-arrows">
+                                <input type="image" value="" ng-click="shiftLeft()"
+                                       ng-disabled="!canShiftLeft()"
+                                       ng-src="{{ getLeftImg() }}"
+                                       />
+                                <input type="image" ng-click="shiftRight()" 
+                                       ng-disabled="!canShiftRight()" 
+                                       ng-src="{{ getRightImg() }}"
+                               />
+                            </td>
+                        </tr>
                         <tr ng-repeat="row in table">
                             <!-- "track by $index" for duplicate ""s -->
                             <td ng-repeat="char in row track by $index" 
@@ -60,12 +67,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="compose-results-arrow">
-                <input type="image" value="" ng-click="shiftRight()" 
-                       ng-disabled="!canShiftRight()" 
-                       ng-src="{{ getRightImg() }}"
-                       />
-                </div>
             </div>
             <div id="compose-character" ng_show="!tableMode">
                 <div id="compose-character-inner">
