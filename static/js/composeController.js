@@ -29,8 +29,8 @@ angular.module("app").controller("composeController", function($scope, $http, $l
   $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
   $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
 
-  $scope.tableRows = 5;
-  $scope.tableCols = 10;
+  $scope.rows = 5;
+  $scope.cols = 10;
 
   // current state
   // where the table starts and ends (1-indexed)
@@ -48,12 +48,26 @@ angular.module("app").controller("composeController", function($scope, $http, $l
 
   // output
   $scope.characters = [];
-  $scope.table = [];
-  for (var i = 0; i < $scope.tableRows; i++) {
-      $scope.table.push(new Array(10).fill(""));
-  }
   
   // functions
+  $scope.getRange = function(number) {
+      var arr = new Array(number);
+      for (var i = 0; i < number; i++) {
+          arr[i] = i;
+      }
+      return arr;
+  }
+
+  $scope.getChar = function(r, c) {
+      var index = r * $scope.cols + c;
+      if (index >= $scope.characters.length) {
+          return "";
+      }
+      else {
+          return $scope.characters[index];
+      }
+  }
+
   $scope.getResultsMessage = function() {
     if ($scope.tableMode) {
         if ($scope.characters.length > 0) {
@@ -69,30 +83,6 @@ angular.module("app").controller("composeController", function($scope, $http, $l
       return "Displaying character \"" + $scope.focusedCharacter + "\"";
     }
   }
-
-  $scope.clearTable = function() {
-    for (var i = 0; i < $scope.tableRows; i++) {
-      for (var j = 0; j < $scope.tableCols; j++) {
-        $scope.table[i][j] = "";
-      }
-    }
-  }
-
-  $scope.loadTable = function() {
-    $scope.clearTable();
-    for (var i = 0; i < $scope.tableRows; i++) {
-      for (var j = 0; j < $scope.tableCols; j++) {
-        var current = i * $scope.tableCols + j;
-
-        // If you don't have enough characters, break early
-        if (current >= $scope.characters.length) {
-          return;
-        }
-
-        $scope.table[i][j] = $scope.characters[current];
-      }
-    }
-  };
 
   $scope.compose = function(start, changedKinds) {
       // default argument
@@ -140,7 +130,6 @@ angular.module("app").controller("composeController", function($scope, $http, $l
                                  $scope.characters.length - 1;
 
           $scope.tableMode = true;
-          $scope.loadTable();
       });
   };
 
@@ -166,7 +155,7 @@ angular.module("app").controller("composeController", function($scope, $http, $l
       if (!$scope.canShiftLeft()) {
         return;
       }
-      var start = $scope.charactersStart - $scope.tableRows * $scope.tableCols
+      var start = $scope.charactersStart - $scope.rows * $scope.cols
                   - 1;
       start = Math.max(0, start); // if you get unaligned for whatever reason
       $scope.compose(start);
@@ -213,7 +202,31 @@ angular.module("app").controller("composeController", function($scope, $http, $l
       return $scope.googleUrl + $scope.focusedCharacter;
   }
 
+  $scope.updateCols = function() {
+
+  }
+
+  // also some jQuery stuff to dynamically change # of cols
+  $(window).resize(function() {                                       
+      var width = $(this).width();
+      if (width < 850) {
+          $scope.cols = Math.floor((width - 50) / 80);
+      }
+      else {
+          $scope.cols = 10;
+      }
+      $scope.$apply();
+  }); 
+
   // Setting things up initially
+  var width = $(window).width();
+  if (width < 850) {
+      $scope.cols = Math.floor((width - 50) / 80);
+  }
+  else {
+      $scope.cols = 10;
+  }
+
   var params = $location.search();
   if ("kind" in params) {
       $scope.kind = parseInt(params["kind"]);
@@ -225,4 +238,5 @@ angular.module("app").controller("composeController", function($scope, $http, $l
       $scope.part2 = params["part2"];
   }
   $scope.compose(0);
+
 });

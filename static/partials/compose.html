@@ -41,7 +41,7 @@
                 <table id="compose-results-table">
                     <tbody>
                         <tr>
-                            <td colspan="9">
+                            <td colspan="{{ cols - 1 }}">
                             </td>
                             <td id="compose-results-arrows">
                                 <input type="image" value="" ng-click="shiftLeft()"
@@ -54,15 +54,15 @@
                                />
                             </td>
                         </tr>
-                        <tr ng-repeat="row in table">
+                        <tr ng-repeat="r in getRange(rows)">
                             <!-- "track by $index" for duplicate ""s -->
-                            <td ng-repeat="char in row track by $index" 
+                            <td ng-repeat="c in $parent.getRange($parent.cols)"
                                 ng-click="char == '' || 
-                                      $parent.$parent.focus(char)"
+                                      $parent.$parent.focus(getChar(r, c))"
                                 ng-style="char == '' && {} ||
                                           { 'cursor': 'pointer' }"
                                 class="compose-results-cell">
-                              {{ char }}
+                              {{ getChar(r, c) }}
                             </td>
                         </tr>
                     </tbody>

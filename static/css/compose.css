@@ -44,6 +44,11 @@
     display: inline;
 }
 
+#compose-results-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #compose-results-arrows {
     display: flex;
     align-items: center;
@@ -111,15 +116,15 @@
 
 /* small screens */
 @media (max-width:768px) {
-    #compose-results-arrows input {
+    /*#compose-results-arrows input {
         height: 28px;
         width: 28px;
-    }
+    }*/
     
-    .compose-results-cell {
+    /*.compose-results-cell {
         height: 70px;
         width: 70px;
-    }
+    }*/
 }
 
 /* extra small screens */
