@@ -17,8 +17,90 @@
             <hr>
             
             <h2>Details:</h2>
-            <div class="decompose-details-container fluid-container"
-                 ng-show="hasPart2[kind]">
+            <!-- <div class="decompose-row-height">
+                <div class="container-fluid decompose-third-div">
+                    <div class="row">
+                        <div class="decompose-info-cell col-xs-12">
+                            <img ng-src="{{ '/static/img/kind'+kind+'.png' }}" 
+                                 ng-attr-title="{{ kindNames[kind] }}">
+                            <h4>{{ kindNames[kind] }}</h4>
+                        </div>
+                        <div class="col-xs-12"></div>
+                    </div>
+                </div>
+
+                <div class="container-fluid decompose-third-div">
+                    <div class="row">
+                        <div class="decompose-info-cell col-xs-12">
+                            <div class="decompose-part-container">
+                                <div class="decompose-part-hanzi">
+                                    {{ getPart1(true) }}
+                                </div>
+                            </div>
+                            <h4>{{ part1Names[kind] }}</h4>
+                            <h5>{{ getPart1Message() }}</h5>
+                        </div>
+                        <div class="col-xs-12" ng-show="isCharacter1()">
+                            <h3>Open {{ getPart1() }} with:</h3>
+                            <ul id="decompose-character-links">                       
+                                <li>
+                                    <a ng-href="{{ getYB(part1) }}"                      
+                                       target="_blank">YellowBridge</a>             
+                                </li>                                               
+                                <li>
+                                    <a ng-href="{{ getHC(part1) }}"                    
+                                       target="_blank">HanziCraft</a>                     
+                                </li>
+                                <li>
+                                    <a ng-href="{{ getLINE(part1) }}"                    
+                                       target="_blank">LINE Dict</a>                
+                                </li>                                               
+                                <li>
+                                    <a ng-href="{{ getGoogle(part1) }}" 
+                                       target="_blank">Google Translate</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="decompose-third-div">
+                    <div class="row">
+                        <div class="decompose-info-cell col-xs-12">
+                            <div class="decompose-part-container">
+                                <div class="decompose-part-hanzi">
+                                    {{ getPart2(true) }}
+                                </div>
+                            </div>
+                            <h4>{{ part2Names[kind] }}</h4>
+                            <h5>{{ getPart2Message() }}</h5>
+                        </div>
+                        <div class="col-xs-12" ng-show="isCharacter2()">
+                            <h3>Open {{ getPart2() }} with:</h3>
+                            <ul id="decompose-character-links">                       
+                                <li>
+                                    <a ng-href="{{ getYB(part2) }}"                      
+                                       target="_blank">YellowBridge</a>             
+                                </li>                                               
+                                <li>
+                                    <a ng-href="{{ getHC(part2) }}"                    
+                                       target="_blank">HanziCraft</a>                     
+                                </li>
+                                <li>
+                                    <a ng-href="{{ getLINE(part2) }}"                    
+                                       target="_blank">LINE Dict</a>                
+                                </li>                                               
+                                <li>
+                                    <a ng-href="{{ getGoogle(part2) }}"                  
+                                       target="_blank">Google Translate</a>         
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            
+            
+            <div class="decompose-details-container fluid-container" ng-show="hasPart2[kind]">
                 <div class="row decompose-row-height">
                     <div class="decompose-info-cell col-xs-4">
                         <div>
