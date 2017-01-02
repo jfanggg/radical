@@ -24,12 +24,12 @@
                 <div class="compose-parts form-group">
                     <p>{{ part1Names[kind] }}:</p>
                     <input class="form-control" type="text"
-                           ng-change="compose()" ng-model="part1"/>
+                           ng-change="compose(0)" ng-model="part1"/>
                 </div>
                 <div class="compose-parts form-group" ng-show="hasPart2[kind]">
                     <p>{{ part2Names[kind] }}:</p>
                     <input class="form-control" type="text"
-                           ng-change="compose()" ng-model="part2"/>
+                           ng-change="compose(0)" ng-model="part2"/>
                 </div>
             </form>
 
@@ -45,18 +45,18 @@
                             </td>
                             <td id="compose-results-arrows">
                                 <input type="image" value="" ng-click="shiftLeft()"
-                                       ng-disabled="!canShiftLeft()"
+                                       ng-disabled="!hasLeft()"
                                        ng-src="{{ getLeftImg() }}"
                                        />
                                 <input type="image" ng-click="shiftRight()" 
-                                       ng-disabled="!canShiftRight()" 
+                                       ng-disabled="!hasRight()" 
                                        ng-src="{{ getRightImg() }}"
                                />
                             </td>
                         </tr>
-                        <tr ng-repeat="r in getRange(rows)">
+                        <tr ng-repeat="r in range(rows)">
                             <!-- "track by $index" for duplicate ""s -->
-                            <td ng-repeat="c in $parent.getRange($parent.cols)"
+                            <td ng-repeat="c in $parent.range($parent.cols)"
                                 ng-click="char == '' || 
                                       $parent.$parent.focus(getChar(r, c))"
                                 ng-style="char == '' && {} ||

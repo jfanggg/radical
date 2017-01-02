@@ -56,8 +56,8 @@
 }
 
 #compose-results-arrows input {
-    height: 38px;
-    width: 38px;
+    height: 40px;
+    width: 40px;
 }
 
 .compose-results-cell {
@@ -98,6 +98,7 @@
     float: left;
     text-align: left;
     margin-left: 20px;
+    margin-top: 10px;
 }
 
 #compose-character-description h3:first-child {
@@ -108,25 +109,6 @@
     list-style-position: inside; /* Makes bullets appear inside the div */
 }
 
-.compose-results-arrow {
-    display: none;
-}
-
-
-
-/* small screens */
-@media (max-width:768px) {
-    /*#compose-results-arrows input {
-        height: 28px;
-        width: 28px;
-    }*/
-    
-    /*.compose-results-cell {
-        height: 70px;
-        width: 70px;
-    }*/
-}
-
 /* extra small screens */
 @media (max-width:480px) {
     
@@ -134,5 +116,14 @@
         width: 66px;
         height: 66px;
     }
+
+    .compose-results-cell {
+        height: 60px;
+        width: 60px;
+    }
     
+    #compose-results-arrows input {
+        height: 30px;
+        width: 30px;
+    }
 }
