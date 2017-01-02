@@ -57,9 +57,9 @@
                         <tr ng-repeat="r in range(rows)">
                             <!-- "track by $index" for duplicate ""s -->
                             <td ng-repeat="c in $parent.range($parent.cols)"
-                                ng-click="char == '' || 
+                                ng-click="getChar(r, c) == '' ? null : 
                                       $parent.$parent.focus(getChar(r, c))"
-                                ng-style="char == '' && {} ||
+                                ng-style="getChar(r,  c) == '' ? {} :
                                           { 'cursor': 'pointer' }"
                                 class="compose-results-cell">
                               {{ getChar(r, c) }}
