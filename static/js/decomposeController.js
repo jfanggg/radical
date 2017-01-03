@@ -78,7 +78,7 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
                 message += part[i] + ", ";
             }
             message += part[part.length - 1] 
-            message += " doesn't exist as a character.";
+            message += " doesn't exist as a single character.";
             return message;
         }
         else {
@@ -95,6 +95,7 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
     }
     
     $scope.decompose = function() {
+        console.log('decompose called');
         var cp = $scope.character.charCodeAt(0);
         $http.get("/api/char/" + cp.toString())
             .then(function (response) { 
@@ -137,5 +138,7 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
     if ("char" in params) {
         $scope.character = params["char"];
     }
+    console.log("a");
     $scope.decompose();
+    console.log("b");
 });

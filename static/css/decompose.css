@@ -1,29 +1,18 @@
-.decompose-third-div {
-    width: 33%;
-    display: inline-block;
-}
-
 .decompose-row-height {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.decompose-info-cell {
-    text-align: center;
-}
-
-.decompose-details-container .row:first-child {
-    border-bottom: 1px solid #e0e0e0;
+.decompose-row-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
 }
 
 .decompose-details-container [class*='col-'] {
     padding-top: 15px;
     border-right: 1px solid #e0e0e0;
 
-    /* text-align: center;*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 
 .decompose-details-container [class*='col-']:last-child {
@@ -46,6 +35,34 @@
     justify-content: center;
 }
 
-#decompose-character-links {
-    list-style-position: inside; /* Makes bullets appear inside the div */      
+.decompose-links-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decompose-links-list {
+    text-align: left;
+    list-style-position: inside; /* Makes bullets appear inside div */      
 } 
+
+.decompose-xs-on {
+    display: none;
+}
+
+/* extra small screens */
+@media (max-width: 480px) {
+    .decompose-details-container [class*='col-'] {
+        /* simulates col-12 */
+        width: 100%;
+    }
+
+    .decompose-xs-on {
+        /* only used for <hr> so know it's a block */
+        display: block;
+    }
+
+    .decompose-xs-off {
+        display: none;
+    }
+}
