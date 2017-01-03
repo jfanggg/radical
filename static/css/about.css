@@ -6,7 +6,18 @@
 
 #about-profile-pic {
     float: left;
-    height: 192px;
-    width: 192px;
+    height: 160px;
+    width: 160px;
     margin-right: 20px;
+}
+
+/* extra small screens */
+@media (max-width: 480px) {
+    #about-profile-pic {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 15px;
+    }
 }
