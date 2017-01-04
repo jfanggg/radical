@@ -38,11 +38,11 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
     $scope.part2 = "";
 
     $scope.isCharacter1 = function() {
-        return $scope.part1.length == 1;
+        return $scope.part1.length == 1 && $scope.part1[0] !== "?";
     }
 
     $scope.isCharacter2 = function() {
-        return $scope.part2.length == 1;
+        return $scope.part2.length == 1 && $scope.part2[0] !== "?";
     }
 
     $scope.getPart = function(part, getX) {
@@ -73,12 +73,11 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
 
     $scope.getMessage = function(part) {
         if (part.length !== 1) {
-            var message = "The composition containing ";
-            for (var i = 0; i < part.length - 1; i++) {
-                message += part[i] + ", ";
+            var message = "The composition \"";
+            for (var i = 0; i < part.length; i++) {
+                message += part[i];
             }
-            message += part[part.length - 1] 
-            message += " doesn't exist as a single character.";
+            message += "\" doesn't exist as a character.";
             return message;
         }
         else {

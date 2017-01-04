@@ -50,6 +50,10 @@
     display: none;
 }
 
+#decompose-footnote {
+    margin-top: 15px;
+}
+
 /* extra small screens */
 @media (max-width: 480px) {
     .decompose-details-container [class*='col-'] {
