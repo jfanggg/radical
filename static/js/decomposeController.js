@@ -1,5 +1,6 @@
-angular.module("app").controller("decomposeController", function($scope, $http, $location) {
-    // constants
+angular.module("app").controller("decomposeController", 
+    function($scope, $http, $location) {
+    /* CONSTANTS */
     $scope.kindNames = [                                                             
         "Graphical primitive. Non-composition",                                   
         "Horizontal composition ",                                                
@@ -29,20 +30,42 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
     $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
     $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
 
-    // input
+    /* INPUT */
     $scope.character = "好";
 
-    // output
+    /* OUTPUT */
     $scope.kind = 0;
     $scope.part1 = "";
     $scope.part2 = "";
 
+    /* FUNCTIONS */
     $scope.isCharacter1 = function() {
         return $scope.part1.length == 1 && $scope.part1[0] !== "?";
     }
 
     $scope.isCharacter2 = function() {
         return $scope.part2.length == 1 && $scope.part2[0] !== "?";
+    }
+
+    $scope.limit = function(oldValue) {
+        // I'm sorry I don't know how to write this more cleanly
+        var count = 0;
+        var first = "";
+        $scope.character = $scope.character.trim();
+        for (var c of $scope.character) {
+            if (count == 0) {
+                first = c;
+            }
+            count++;
+        }
+
+        if (oldValue === "" || count <= 1) {
+            $scope.character = first;
+        }
+        else {
+            $scope.character = oldValue;
+        }
+        return oldValue !== $scope.character;
     }
 
     $scope.getPart = function(part, getX) {
@@ -94,13 +117,17 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
     }
     
     $scope.decompose = function() {
-        console.log('decompose called');
         var cp = $scope.character.charCodeAt(0);
         $http.get("/api/char/" + cp.toString())
             .then(function (response) { 
                 $scope.kind = response.data.kind;
                 $scope.part1 = response.data.part1;
                 $scope.part2 = response.data.part2;
+                // handles *'s for repetitions
+                if ($scope.part2.length == 1 && $scope.part2[0] == "*" && 
+                    $scope.hasPart2[$scope.kind]) {
+                    $scope.part2 = $scope.part1;
+                }
             }
         );
     };
@@ -132,12 +159,10 @@ angular.module("app").controller("decomposeController", function($scope, $http, 
         return $scope.googleUrl + character;
     }
 
-    // Setting things up initially
+    /* INITIAL SETUP */
     var params = $location.search();
     if ("char" in params) {
         $scope.character = params["char"];
     }
-    console.log("a");
     $scope.decompose();
-    console.log("b");
 });

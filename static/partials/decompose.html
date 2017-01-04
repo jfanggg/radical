@@ -6,7 +6,8 @@
                 <div class="col-xs-4">
                     <div class="form-group">
                         <input class="form-control input-lg" type="text" 
-                               ng-change="decompose()" 
+                               ng-change="limit('{{ character}}') && decompose()" 
+                               ng-trim="false"
                                ng-model="character"/>
                     </div>
                 </div>
@@ -41,7 +42,8 @@
                         <hr class="decompose-xs-off">
                         <button class="btn btn-default"
                                 ng-click="composePart1()">
-                            Compose with {{ getPart1() }}
+                            Compose with {{ getPart1()  + " " + 
+                                            part1Names[kind].toLowerCase() }}
                         </button>
                         <hr class="decompose-xs-off">
                         <h5>{{ getPart1Message() }}</h5>
@@ -85,7 +87,8 @@
                         <hr class="decompose-xs-off">
                         <button class="btn btn-default"
                                 ng-click="composePart2()">
-                            Compose with {{ getPart2() }}
+                            Compose with {{ getPart2()  + " " + 
+                                            part2Names[kind].toLowerCase() }}
                         </button>
                         <hr class="decompose-xs-off">
                         <h5>{{ getPart2Message() }}</h5>

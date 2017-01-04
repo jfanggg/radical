@@ -74,16 +74,16 @@ angular.module("app").controller("composeController",
     $scope.getResultsMessage = function() {
       if ($scope.tableMode) {
           if ($scope.characters.length > 0) {
-            return "Displaying characters " + ($scope.start + 1) + "~" + 
-                    ($scope.end + 1) + " out of " + $scope.matches +
-                    " matches. Click for more options"
+              return "Displaying characters " + ($scope.start + 1) + "~" + 
+                      ($scope.end + 1) + " out of " + $scope.matches +
+                      " matches. Click for more options"
           }
           else {
-            return "No matches to show"
+              return "No matches to show"
           }
       } 
       else {
-        return "Displaying character \"" + $scope.focusedCharacter + "\"";
+          return "Displaying character \"" + $scope.focusedCharacter + "\"";
       }
     }
 
@@ -92,21 +92,12 @@ angular.module("app").controller("composeController",
             Math.min($scope.characters.length, $scope.rows * $scope.cols);
     }
 
-    $scope.compose = function(start, changedKinds) {
-        // default argument
-        if (typeof(changedKinds) == "undefined") {
-            changedKinds = false;
-        }
+    $scope.clearParts = function() {
+        $scope.part1 = "";
+        $scope.part2 = "";
+    }
 
-        // clearing inputs in certain circumstances
-        if (changedKinds) {
-            $scope.part1 = "";
-            $scope.part2 = "";
-        }
-        if (!$scope.hasPart2[$scope.kind]) {
-            $scope.part2 = "";
-        }
-
+    $scope.compose = function(start) {
         var partQuery = function(part, number) {
             var query = "";
             if (part !== "") {
@@ -146,7 +137,7 @@ angular.module("app").controller("composeController",
 
     $scope.shiftLeft = function() {
         if (!$scope.hasLeft()) {
-          return;
+            return;
         }
         var start = $scope.start - $scope.rows * $scope.cols;
         start = Math.max(0, start);
@@ -231,6 +222,9 @@ angular.module("app").controller("composeController",
     var params = $location.search();
     if ("kind" in params) {
         $scope.kind = parseInt(params["kind"]);
+        if (!(0 <= $scope.kind && $scope.kind < 10)) {
+            $scope.kind = 0;
+        }
     }
     if ("part1" in params) {
         $scope.part1 = params["part1"];

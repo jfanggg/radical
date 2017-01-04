@@ -76,13 +76,19 @@ class CharactersResource(Resource):
     part1 = int_tuple(part1.split("-")) if part1 else None
     part2 = int_tuple(part2.split("-")) if part2 else None
 
-    characters_set = db.find_characters(kind, part1, part2)
-    characters = chr_list([character.cp for character in characters_set])
-    characters = slice_list(characters, start, MAX_RESULTS)
+    char_set = db.find_characters(kind, part1, part2)
+
+    # special case for superposition since parts are interchangeable
+    if kind == 9:
+      char_set2 = db.find_characters(kind, part2, part1)
+      char_set |= char_set2
+        
+    char_list = slice_list([char.cp for char in char_set], start, MAX_RESULTS)
+    characters = chr_list(char_list)
 
     return {
       "characters": characters,
-      "num_characters": len(characters_set)
+      "num_characters": len(char_set)
     }
 
 @app.route("/")
