@@ -5,7 +5,7 @@ from webargs import fields, validate
 from webargs.flaskparser import use_kwargs
 
 # Constants
-DB_PATH = "resources/wiki_processed.txt"
+DB_PATH = "/home/fang97j/radical/resources/wiki_processed.txt"
 MAX_RESULTS = 50
 
 
@@ -98,6 +98,9 @@ def index():
 api.add_resource(CharacterResource, "/api/char/<int:char_cp>")
 api.add_resource(CharactersResource, "/api/chars/")
 
+
+db = initialize_db()
+
 if __name__ == "__main__":
-  db = initialize_db()
-  app.run("0.0.0.0")
+    if 'liveconsole' not in gethostname():
+        app.run()
