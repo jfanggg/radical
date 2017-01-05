@@ -95,7 +95,7 @@ angular.module("app").controller("decomposeController",
     }
 
     $scope.getMessage = function(part) {
-        if (part.length !== 1) {
+        if (part.length !== 1 || part == "?") {
             var message = "The composition \"";
             for (var i = 0; i < part.length; i++) {
                 message += part[i];
