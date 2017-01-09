@@ -5,5 +5,9 @@ This project was created using the following languages / technologies: HTML, CSS
 
 A live demo of this application is currently hosted [here][radical]
 
+Potential future features:
+- sorting characters based on frequency
+- add in Pinyin + tones data and searching
+
 [wikicommons]: https://commons.wikimedia.org/wiki/Commons:Chinese_characters_decomposition
 [radical]: http://radical.jfanggg.com/#/
