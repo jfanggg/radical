@@ -25,7 +25,7 @@ angular.module("app").controller("decomposeController",
         "", "Right", "Bottom", "Outer", "Bottom", "Inner", "", "", "Bottom", 
         "Part", ""
     ]
-    $scope.ybUrl = "http://www.yellowbridge.com/chinese/dictionary.php?word=";
+    $scope.ybUrl = "https://www.yellowbridge.com/chinese/dictionary.php?word=";
     $scope.hcUrl = "http://www.hanzicraft.com/character/";
     $scope.lineUrl = "http://ce.linedict.com/#/cnen/search?query=";
     $scope.googleUrl = "https://translate.google.com/#zh-CN/en/";
